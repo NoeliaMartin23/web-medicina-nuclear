@@ -3,6 +3,9 @@ import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1]
+const ciBase = process.env.VITE_BASE_PATH || (repoName ? `/${repoName}/` : '/')
+
 export default defineConfig({
   plugins: [
     react(),
@@ -13,6 +16,6 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  // Para GitLab/GitHub Pages: ajusta "medicina-nuclear" al nombre de tu repositorio
-  base: process.env.CI ? '/medicina-nuclear/' : '/',
+  // En CI (GitHub Pages), usa el nombre real del repositorio como base.
+  base: process.env.CI ? ciBase : '/',
 })
