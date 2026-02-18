@@ -1,17 +1,17 @@
 # Auto detect text files and perform LF normalization
-* text=auto
+* text=auto eol=lf
 
 # Explicitly mark as text files
-*.ts text
-*.tsx text
-*.js text
-*.jsx text
-*.json text
-*.css text
-*.html text
-*.md text
-*.yml text
-*.yaml text
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+*.json text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
 
 # Binary files
 *.png binary
