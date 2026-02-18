@@ -62,9 +62,9 @@ export default function App() {
       id: 'material', 
       label: 'Material',
       subItems: [
-        { id: 'material-fungible', label: 'Fungible' },
-        { id: 'material-no-fungible', label: 'No Fungible' },
-        { id: 'material-preparacion', label: 'Preparación control y reposición' }
+        { id: 'material-fungible', label: 'Material fungible' },
+        { id: 'material-no-fungible', label: 'Material no fungible' },
+        { id: 'material-preparacion', label: 'Preparación, Control y Reposición del material' }
       ]
     },
     { 
@@ -104,23 +104,20 @@ export default function App() {
     { 
       id: 'cierre', 
       label: 'Cierre',
-      subItems: [
-        { id: 'cierre-resumen', label: 'Resumen' },
-        { id: 'cierre-conclusiones', label: 'Conclusiones' }
-      ]
+      subItems: []
     },
     { 
       id: 'resumen-conclusiones', 
       label: 'Resumen y Conclusiones',
-      subItems: []
+      subItems: [
+        { id: 'resumen-ejecutivo', label: 'Resumen' },
+        { id: 'conclusiones-finales', label: 'Conclusiones' }
+      ]
     },
     { 
       id: 'referencias', 
       label: 'Referencias',
-      subItems: [
-        { id: 'referencias-bibliografia', label: 'Bibliografía' },
-        { id: 'referencias-enlaces', label: 'Enlaces de Interés' }
-      ]
+      subItems: []
     },
   ];
 
@@ -136,19 +133,49 @@ export default function App() {
           />
         );
       case 'material':
-        return <Material />;
+        return (
+          <Material
+            selectedSubSectionId={selectedSubSectionId}
+            onBackToOverview={() => setSelectedSubSectionId(null)}
+          />
+        );
       case 'protocolos':
-        return <Protocols />;
+        return (
+          <Protocols
+            selectedSubSectionId={selectedSubSectionId}
+            onBackToOverview={() => setSelectedSubSectionId(null)}
+          />
+        );
       case 'actividades':
-        return <Activities />;
+        return (
+          <Activities
+            selectedSubSectionId={selectedSubSectionId}
+            onBackToOverview={() => setSelectedSubSectionId(null)}
+          />
+        );
       case 'procedimientos':
-        return <Procedures />;
+        return (
+          <Procedures
+            selectedSubSectionId={selectedSubSectionId}
+            onBackToOverview={() => setSelectedSubSectionId(null)}
+          />
+        );
       case 'documentacion':
-        return <Documentation />;
+        return (
+          <Documentation
+            selectedSubSectionId={selectedSubSectionId}
+            onBackToOverview={() => setSelectedSubSectionId(null)}
+          />
+        );
       case 'cierre':
         return <Closure />;
       case 'resumen-conclusiones':
-        return <ResumenConclusiones />;
+        return (
+          <ResumenConclusiones
+            selectedSubSectionId={selectedSubSectionId}
+            onBackToOverview={() => setSelectedSubSectionId(null)}
+          />
+        );
       case 'referencias':
         return <References />;
       default:
@@ -158,7 +185,17 @@ export default function App() {
 
   const handleSectionChange = (sectionId: Section, subSectionId: string | null = null) => {
     setActiveSection(sectionId);
-    setSelectedSubSectionId(sectionId === 'equipamiento' ? subSectionId : null);
+    setSelectedSubSectionId(
+      sectionId === 'equipamiento' ||
+      sectionId === 'material' ||
+      sectionId === 'protocolos' ||
+      sectionId === 'actividades' ||
+      sectionId === 'procedimientos' ||
+      sectionId === 'documentacion' ||
+      sectionId === 'resumen-conclusiones'
+        ? subSectionId
+        : null
+    );
     setIsSidebarOpen(false);
     setIsSearching(false);
     setSearchResults([]);
@@ -277,7 +314,7 @@ export default function App() {
 
               {/* Title - Center */}
               <h1 className="text-2xl font-bold text-white uppercase">
-                Medicina Nuclear - Mantenimiento de Equipos
+                Gestión Integral del Servicio de Medicina Nuclear
               </h1>
 
               {/* Controls - Right */}
@@ -521,7 +558,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-[#F5B494]">
-              © 2025 Medicina Nuclear - Mantenimiento de Equipos. Todos los derechos reservados.
+              © 2025 Gestión Integral del Servicio de Medicina Nuclear. Todos los derechos reservados.
             </p>
             <div className="flex items-center gap-6">
               <a href="#" className="text-sm text-[#F5B494] hover:text-[#F5B494]/80 transition-colors">

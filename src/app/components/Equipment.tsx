@@ -2,6 +2,8 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { Scan, Monitor, Activity, ArrowLeft } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
+const baseUrl = import.meta.env.BASE_URL;
+
 interface EquipmentItem {
   id: string;
   title: string;
@@ -27,8 +29,7 @@ const acquisitionEquipment: EquipmentItem[] = [
     title: 'Sanitario',
     summary: 'Equipos asistenciales del área diagnóstica y terapéutica que sostienen la atención clínica segura.',
     icon: <Scan className="w-5 h-5 text-blue-600" />,
-    image:
-      'https://images.unsplash.com/photo-1740362381367-09cb98b4e1c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwbnVjbGVhciUyMHNjYW5uZXIlMjBlcXVpcG1lbnR8ZW58MXx8fHwxNzY2NDg5ODk3fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    image: `${baseUrl}images/imagen_material_fungible.png`,
     details: [
       'El equipamiento sanitario integra los dispositivos clínicos de soporte directo al paciente durante los procedimientos de medicina nuclear.',
       'Su disponibilidad impacta en la seguridad, en la continuidad asistencial y en la capacidad de respuesta frente a incidencias durante la exploración.',
@@ -121,6 +122,14 @@ export function Equipment({ selectedSubSectionId = null, onBackToOverview }: Equ
             <p className="text-gray-600 dark:text-gray-300">
               Información detallada de la subsección seleccionada.
             </p>
+          </div>
+
+          <div className="mb-6 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700">
+            <ImageWithFallback
+              src={selectedEquipment.image}
+              alt={selectedEquipment.title}
+              className="w-full max-h-[420px] object-cover"
+            />
           </div>
 
           <div className="space-y-4">

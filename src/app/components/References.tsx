@@ -85,14 +85,6 @@ export function References() {
               ))}
             </div>
           </div>
-
-          <div className="mt-8 bg-gray-100 dark:bg-gray-700/50 rounded-xl p-6">
-            <p className="text-gray-700 dark:text-gray-300">
-              <span className="font-semibold">Nota:</span> Es responsabilidad del personal técnico mantener 
-              actualizadas las referencias a normativa vigente y consultar periódicamente las actualizaciones 
-              emitidas por los organismos reguladores nacionales e internacionales.
-            </p>
-          </div>
         </div>
       </div>
     </section>

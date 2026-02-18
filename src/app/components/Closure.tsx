@@ -9,7 +9,7 @@ export function Closure() {
             <div className="w-16 h-16 bg-green-600 dark:bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
               <CircleCheck className="w-8 h-8 text-white" />
             </div>
-            <h2 className="text-gray-900 dark:text-white">Cierre</h2>
+            <h2 className="text-gray-900 dark:text-white">Cierre de la instalación</h2>
           </div>
           
           <div className="space-y-4 text-gray-700 dark:text-gray-300">

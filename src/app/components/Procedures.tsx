@@ -1,96 +1,162 @@
-import { CircleCheck } from 'lucide-react';
+import { useEffect, useState, type ReactNode } from 'react';
+import { ArrowLeft, Radar, Trash2 } from 'lucide-react';
+import { ImageWithFallback } from './figma/ImageWithFallback';
 
-interface ProcedureStepProps {
-  number: number;
+interface ProcedureItem {
+  id: string;
   title: string;
-  description: string;
-  isLast?: boolean;
+  summary: string;
+  icon: ReactNode;
+  image: string;
+  details: string[];
 }
 
-function ProcedureStep({ number, title, description, isLast }: ProcedureStepProps) {
-  return (
-    <div className="flex gap-6">
-      <div className="flex flex-col items-center">
-        <div className="w-12 h-12 bg-blue-600 dark:bg-blue-500 rounded-full flex items-center justify-center text-white flex-shrink-0">
-          {number}
-        </div>
-        {!isLast && <div className="w-0.5 flex-1 bg-gray-300 dark:bg-gray-600 mt-2" />}
-      </div>
+interface ProceduresProps {
+  selectedSubSectionId?: string | null;
+  onBackToOverview?: () => void;
+}
 
-      <div className="flex-1 pb-12">
-        <h3 className="text-gray-900 dark:text-white mb-2">{title}</h3>
-        <p className="text-gray-600 dark:text-gray-300">{description}</p>
+interface ProcedureButtonProps {
+  item: ProcedureItem;
+  onOpen: (id: string) => void;
+}
+
+function ProcedureButton({ item, onOpen }: ProcedureButtonProps) {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      onOpen(item.id);
+    }
+  };
+
+  return (
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={() => onOpen(item.id)}
+      onKeyDown={handleKeyDown}
+      className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 cursor-pointer"
+    >
+      <div className="h-48 overflow-hidden">
+        <ImageWithFallback
+          src={item.image}
+          alt={item.title}
+          className="w-full h-full object-cover block"
+        />
+      </div>
+      <div className="p-6">
+        <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mb-4">
+          {item.icon}
+        </div>
+        <h3 className="text-gray-900 dark:text-white text-xl mb-3">{item.title}</h3>
+        <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">{item.summary}</p>
       </div>
     </div>
   );
 }
 
-export function Procedures() {
-  const procedures = [
-    {
-      title: "Preparación Inicial",
-      description: "Revisión del programa de mantenimiento y preparación de herramientas, equipos de medida y documentación necesaria. Verificación de disponibilidad de material y repuestos."
-    },
-    {
-      title: "Inspección Visual",
-      description: "Examen detallado del estado general del equipo, cables, conexiones y componentes externos. Detección de anomalías visibles, desgastes o daños en superficies y estructuras."
-    },
-    {
-      title: "Verificación Funcional",
-      description: "Comprobación del correcto funcionamiento de todos los sistemas. Realización de tests de encendido, calibración automática y verificación de parámetros operativos."
-    },
-    {
-      title: "Mediciones y Tests",
-      description: "Ejecución de protocolos de control de calidad específicos. Medición de uniformidad, resolución, sensibilidad y otros parámetros técnicos según fabricante."
-    },
-    {
-      title: "Limpieza y Ajustes",
-      description: "Limpieza de componentes críticos, ajuste de parámetros si necesario y lubricación de partes móviles. Verificación de sistemas de refrigeración y ventilación."
-    },
-    {
-      title: "Documentación",
-      description: "Registro completo de todas las actividades realizadas, mediciones obtenidas e incidencias detectadas. Actualización del libro de mantenimiento y archivo de certificados."
-    },
-    {
-      title: "Verificación Final",
-      description: "Comprobación final del correcto funcionamiento tras las intervenciones. Verificación de que todos los parámetros están dentro de especificaciones y autorización para uso clínico."
-    }
-  ];
+const procedures: ProcedureItem[] = [
+  {
+    id: 'procedimientos-monitoreo',
+    title: 'Monitoreo de área y contaminación',
+    summary: 'Protocolos de vigilancia radiologica para control de niveles de area y deteccion temprana de contaminacion.',
+    icon: <Radar className="w-5 h-5 text-blue-600" />,
+    image:
+      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    details: [
+      'El monitoreo de area y contaminacion se realiza de forma sistematica antes, durante y despues de la actividad clinica.',
+      'Incluye control de superficies, puntos criticos y zonas de circulacion para detectar incrementos no esperados de radiacion.',
+      'Los resultados se registran en planillas de seguimiento y, ante desviaciones, se aplican acciones de descontaminacion y verificacion.'
+    ]
+  },
+  {
+    id: 'procedimientos-gestion',
+    title: 'Gestión de residuos radioactivos',
+    summary: 'Procedimientos para segregacion, almacenamiento temporal y eliminacion segura de residuos segun normativa.',
+    icon: <Trash2 className="w-5 h-5 text-blue-600" />,
+    image:
+      'https://images.unsplash.com/photo-1605201107820-951659ec034e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    details: [
+      'La gestion de residuos radioactivos contempla clasificacion por tipo, actividad y periodo de semidesintegracion.',
+      'El almacenamiento temporal se realiza en contenedores identificados, con control de acceso y trazabilidad documental completa.',
+      'La retirada o liberacion del residuo se ejecuta segun protocolo interno y marco normativo vigente, con registro de cada etapa.'
+    ]
+  }
+];
 
-  return (
-    <section className="py-16 px-6">
-      <div className="max-w-5xl mx-auto">
+export function Procedures({ selectedSubSectionId = null, onBackToOverview }: ProceduresProps) {
+  const [activeProcedureId, setActiveProcedureId] = useState<string | null>(selectedSubSectionId);
+
+  useEffect(() => {
+    const exists = procedures.some((item) => item.id === selectedSubSectionId);
+    setActiveProcedureId(exists ? selectedSubSectionId : null);
+  }, [selectedSubSectionId]);
+
+  const selectedProcedure = procedures.find((item) => item.id === activeProcedureId) ?? null;
+
+  const handleBack = () => {
+    setActiveProcedureId(null);
+    onBackToOverview?.();
+  };
+
+  if (selectedProcedure) {
+    return (
+      <section className="py-16 px-6">
         <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
-          <div className="mb-12">
-            <h2 className="text-gray-900 dark:text-white mb-3">Procedimientos</h2>
+          <button
+            type="button"
+            onClick={handleBack}
+            className="inline-flex items-center gap-2 text-blue-700 dark:text-blue-300 hover:underline mb-6"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Volver a protocolos PR
+          </button>
+
+          <div className="mb-6">
+            <h2 className="text-gray-900 dark:text-white mb-2">{selectedProcedure.title}</h2>
             <p className="text-gray-600 dark:text-gray-300">
-              Secuencia detallada de pasos para la ejecución del mantenimiento
+              Informacion detallada de la subseccion seleccionada.
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-blue-50 to-white dark:from-blue-900/20 dark:to-transparent rounded-2xl p-8 border border-blue-100 dark:border-blue-800">
-            {procedures.map((procedure, index) => (
-              <ProcedureStep
-                key={index}
-                number={index + 1}
-                title={procedure.title}
-                description={procedure.description}
-                isLast={index === procedures.length - 1}
-              />
-            ))}
+          <div className="mb-6 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+            <ImageWithFallback
+              src={selectedProcedure.image}
+              alt={selectedProcedure.title}
+              className="w-full max-h-[420px] object-cover block"
+            />
           </div>
 
-          <div className="mt-8 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 flex items-start gap-4">
-            <CircleCheck className="w-6 h-6 text-green-600 dark:text-green-400 flex-shrink-0 mt-1" />
-            <div>
-              <h4 className="text-green-900 dark:text-green-200 mb-2">Importante</h4>
-              <p className="text-green-800 dark:text-green-300">
-                Todos los procedimientos deben ser realizados por personal técnico cualificado y autorizado. 
-                En caso de detectar anomalías graves, suspender el uso del equipo y contactar con el servicio 
-                técnico oficial.
+          <div className="space-y-4">
+            {selectedProcedure.details.map((paragraph, index) => (
+              <p key={index} className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                {paragraph}
               </p>
-            </div>
+            ))}
           </div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="py-16 px-6">
+      <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
+        <div className="mb-12">
+          <h2 className="text-gray-900 dark:text-white mb-3">Protocolos PR</h2>
+          <p className="text-gray-600 dark:text-gray-300">
+            Selecciona una subseccion para abrir su ventana con informacion completa.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {procedures.map((procedure) => (
+            <ProcedureButton
+              key={procedure.id}
+              item={procedure}
+              onOpen={setActiveProcedureId}
+            />
+          ))}
         </div>
       </div>
     </section>
