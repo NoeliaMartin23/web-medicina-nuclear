@@ -318,7 +318,7 @@ export function References() {
               <FolderOpen className="w-10 h-10 text-[#3F5B6F] dark:text-blue-300 flex-shrink-0" />
               <div>
                 <h2 className="text-gray-900 dark:text-white">{activeFolder.title}</h2>
-                <p className="text-gray-600 dark:text-gray-300 text-sm mt-1">{activeFolder.description}</p>
+              <p className="text-black dark:text-white text-sm mt-1">{activeFolder.description}</p>
               </div>
             </div>
 
@@ -337,7 +337,7 @@ export function References() {
                         [{index + 1}]
                       </span>
                       <div className="min-w-0 flex-1">
-                        <p className="text-gray-800 dark:text-gray-100 leading-relaxed text-sm">
+                    <p className="text-black dark:text-white leading-relaxed text-sm">
                           {reference.citation}
                         </p>
                         {reference.url && (
@@ -372,7 +372,7 @@ export function References() {
               <BookOpen className="w-10 h-10 text-[#3F5B6F] dark:text-blue-300 flex-shrink-0" />
               <div>
                 <h2 className="text-gray-900 dark:text-white">Referencias</h2>
-                <p className="text-gray-600 dark:text-gray-300 text-sm mt-1">
+                      <p className="text-black dark:text-white text-sm mt-1">
                   Carpetas organizadas por sección de la web con las referencias bibliográficas utilizadas en formato Vancouver.
                 </p>
               </div>
@@ -390,7 +390,7 @@ export function References() {
                   <Folder className="w-10 h-10 text-[#3F5B6F] dark:text-blue-300 flex-shrink-0" />
                   <div className="min-w-0">
                     <h3 className="text-gray-900 dark:text-white text-lg">{folder.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm mt-2 leading-relaxed">
+                    <p className="text-black dark:text-white text-sm mt-2 leading-relaxed">
                       {folder.description}
                     </p>
                     <div className="flex items-center gap-2 mt-4 text-xs text-gray-500 dark:text-gray-400">

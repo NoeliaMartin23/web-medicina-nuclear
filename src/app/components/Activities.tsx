@@ -51,7 +51,7 @@ function ActivityButton({ item, onOpen }: ActivityButtonProps) {
           {item.icon}
         </div>
         <h3 className="text-gray-900 dark:text-white text-xl mb-3">{item.title}</h3>
-        <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">{item.summary}</p>
+                    <p className="text-black dark:text-white text-sm leading-relaxed">{item.summary}</p>
       </div>
     </div>
   );
@@ -126,7 +126,7 @@ export function Activities({ selectedSubSectionId = null, onBackToOverview }: Ac
 
           <div className="mb-6">
             <h2 className="text-gray-900 dark:text-white mb-2">{selectedActivity.title}</h2>
-            <p className="text-gray-600 dark:text-gray-300">
+                  <p className="text-black dark:text-white">
               Información detallada de la subsección seleccionada.
             </p>
           </div>
@@ -141,7 +141,7 @@ export function Activities({ selectedSubSectionId = null, onBackToOverview }: Ac
 
           <div className="space-y-4">
             {selectedActivity.details.map((paragraph, index) => (
-              <p key={index} className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                      <p key={index} className="text-black dark:text-white leading-relaxed">
                 {paragraph}
               </p>
             ))}
@@ -159,7 +159,7 @@ export function Activities({ selectedSubSectionId = null, onBackToOverview }: Ac
             <img src={actividadesIcono} alt="" className="w-16 h-16 object-contain flex-shrink-0" aria-hidden="true" />
             <h2 className="text-gray-900 dark:text-white">Actividades</h2>
           </div>
-          <p className="text-gray-600 dark:text-gray-300">
+                  <p className="text-black dark:text-white">
             Selecciona una subsección para abrir su ventana con información completa.
           </p>
         </div>

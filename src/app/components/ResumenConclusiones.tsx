@@ -49,7 +49,7 @@ function ResumenConclusionesButton({ item, onOpen }: ResumenConclusionesButtonPr
           {item.icon}
         </div>
         <h3 className="text-gray-900 dark:text-white text-xl mb-3">{item.title}</h3>
-        <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">{item.summary}</p>
+                    <p className="text-black dark:text-white text-sm leading-relaxed">{item.summary}</p>
       </div>
     </div>
   );
@@ -61,12 +61,13 @@ const summaryConclusionItems: SummaryConclusionItem[] = [
     title: 'Resumen',
     summary: 'Síntesis de los puntos clave del programa de mantenimiento en medicina nuclear.',
     icon: <FileText className="w-5 h-5 text-blue-600" />,
-    image:
-      'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    image: '/images/FotoResumen.png',
     details: [
-      'Esta subsección ofrece un resumen ejecutivo del programa de mantenimiento, enfocándose en los elementos que sostienen la seguridad y continuidad asistencial.',
-      'Se prioriza el mantenimiento preventivo programado, la aplicación de protocolos de protección radiológica y la verificación continua de parámetros críticos.',
-      'La coordinación entre equipamiento, protocolos operativos y documentación técnica permite reducir fallos, mejorar tiempos de respuesta y fortalecer la trazabilidad del servicio.'
+      'El trabajo se centra en el mantenimiento de los equipos y del material utilizado en una instalación de Medicina Nuclear, destacando la importancia de garantizar la seguridad, el correcto funcionamiento técnico y la calidad diagnóstica de las exploraciones realizadas.',
+      'En primer lugar, se ha estudiado el equipamiento principal presente en una unidad de Medicina Nuclear, incluyendo gammacámaras, sistemas PET-TC, activímetros, generadores y diferentes accesorios necesarios para la adquisición y procesamiento de imágenes diagnósticas. También se ha descrito el material de la sala de exploración, diferenciando entre material fungible y no fungible, así como las medidas necesarias para su conservación, limpieza y reposición.',
+      'Además, se han analizado las condiciones de mantenimiento preventivo y correctivo de los equipos, destacando la necesidad de realizar revisiones periódicas para evitar averías y asegurar un funcionamiento preciso, estable y seguro. Tmabién, se ha abordado el procedimiento de cierre de la instalación, incluyendo las verificaciones finales de seguridad, desconexión de equipos y control radiológico del área.',
+      'Por otra parte, el trabajo contempla la relevancia de la protección radiológica dentro de Medicina Nuclear, tanto para los trabajadores como para los pacientes y el medio ambiente.',
+      'También, se desarrollan las medidas de protección radiológica, el monitoreo de contaminación y la gestión de residuos radiactivos, junto con la documentación necesaria para el registro de averías, incidencias, mantenimiento y reposición de fuentes radiactivas dentro de la instalación.'
     ]
   },
   {
@@ -74,12 +75,12 @@ const summaryConclusionItems: SummaryConclusionItem[] = [
     title: 'Conclusiones',
     summary: 'Conclusiones finales sobre impacto, seguridad y sostenibilidad del mantenimiento.',
     icon: <CircleCheck className="w-5 h-5 text-blue-600" />,
-    image:
-      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    image: '/images/FotoConclusiones.png',
     details: [
-      'La implementación de un programa integral de mantenimiento es esencial para garantizar operatividad técnica, seguridad clínica y cumplimiento normativo.',
-      'El cumplimiento riguroso de los protocolos establecidos protege al personal y a los pacientes, y mantiene la calidad de los resultados diagnósticos y terapéuticos.',
-      'La inversión sostenida en mantenimiento representa una decisión estratégica para prolongar la vida útil de los equipos y asegurar la sostenibilidad del servicio.'
+      'El mantenimiento de los equipos y del material de una instalación de Medicina Nuclear constituye una actividad fundamental para garantizar exploraciones diagnósticas seguras, precisas y de calidad. El correcto estado de los equipos no solo influye en la obtención de imágenes fiables, sino también en la seguridad del paciente, del personal sanitario y del entorno de trabajo.',
+      'A lo largo del trabajo se ha podido comprobar que los procedimientos de mantenimiento preventivo permiten detectar fallos antes de que afecten al funcionamiento de los sistemas, reduciendo tiempos de inactividad y evitando posibles riesgos radiológicos. Asimismo, la adecuada organización del material de la sala y el cumplimiento de los protocolos de cierre favorecen un entorno de trabajo más eficiente, controlado y seguro.',
+      'También se concluye que la protección radiológica tiene un papel esencial dentro de Medicina Nuclear, ya que el uso de sustancias radiactivas requiere controles estrictos y continuos para minimizar la exposición innecesaria. Por ello, los controles de calidad y la vigilancia radiológica deben realizarse de manera periódica, rigurosa y documentada.',
+      'Por último, este trabajo permite comprender la gran responsabilidad técnica y sanitaria asociada al mantenimiento de una instalación de Medicina Nuclear. La futura incorporación de los protocolos específicos de control de calidad, gestión de residuos y documentación técnica completará una visión más global, profesional y especializada del funcionamiento integral de este tipo de servicios hospitalarios.'
     ]
   }
 ];
@@ -127,9 +128,6 @@ export function ResumenConclusiones({
 
           <div className="mb-6">
             <h2 className="text-gray-900 dark:text-white mb-2">{selectedItem.title}</h2>
-            <p className="text-gray-600 dark:text-gray-300">
-              Información detallada de la subsección seleccionada.
-            </p>
           </div>
 
           <div className="mb-6 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
@@ -142,7 +140,7 @@ export function ResumenConclusiones({
 
           <div className="space-y-4">
             {selectedItem.details.map((paragraph, index) => (
-              <p key={index} className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                      <p key={index} className="text-black dark:text-white leading-relaxed">
                 {paragraph}
               </p>
             ))}
@@ -157,7 +155,7 @@ export function ResumenConclusiones({
       <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
         <div className="mb-12">
           <h2 className="text-gray-900 dark:text-white mb-3">Resumen y Conclusiones</h2>
-          <p className="text-gray-600 dark:text-gray-300">
+                  <p className="text-black dark:text-white">
             Selecciona una subsección para abrir su ventana con información completa.
           </p>
         </div>

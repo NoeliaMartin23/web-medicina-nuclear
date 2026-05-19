@@ -28,7 +28,7 @@ export function Closure() {
             <h2 className="text-gray-900 dark:text-white">Cierre de la instalación</h2>
           </div>
           
-          <div className="space-y-4 text-gray-700 dark:text-gray-300">
+        <div className="space-y-4 text-black dark:text-white">
             <p>
               Una vez finalizada la actividad clínica y comprobado que no quedan pacientes pendientes ni estudios abiertos en el sistema, 
               se procede al cierre de la instalación de Medicina Nuclear. Antes de abandonar la sala, el técnico debe verificar que todas 
@@ -44,28 +44,44 @@ export function Closure() {
               Según el protocolo del servicio, también debe anotarse información relacionada con:
             </p>
 
-            <ul className="space-y-2 ml-6">
-              <li className="flex items-start gap-2">
-                <div className="w-1.5 h-1.5 bg-[#3F5B6F] rounded-full mt-2 flex-shrink-0" />
-                <span>Hora de cierre de la instalación.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <div className="w-1.5 h-1.5 bg-[#3F5B6F] rounded-full mt-2 flex-shrink-0" />
-                <span>Profesional responsable del cierre.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <div className="w-1.5 h-1.5 bg-[#3F5B6F] rounded-full mt-2 flex-shrink-0" />
-                <span>Estado operativo de los equipos.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <div className="w-1.5 h-1.5 bg-[#3F5B6F] rounded-full mt-2 flex-shrink-0" />
-                <span>Incidencias detectadas durante el turno.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <div className="w-1.5 h-1.5 bg-[#3F5B6F] rounded-full mt-2 flex-shrink-0" />
-                <span>Necesidades de mantenimiento o revisión técnica.</span>
-              </li>
-            </ul>
+            <div className="flex items-start justify-between gap-8">
+
+              {/* Lista */}
+              <ul className="space-y-2 ml-6 flex-1">
+                <li className="flex items-start gap-2">
+                  <div className="w-1.5 h-1.5 bg-[#3F5B6F] rounded-full mt-2 flex-shrink-0" />
+                  <span>Hora de cierre de la instalación.</span>
+                </li>
+
+                <li className="flex items-start gap-2">
+                  <div className="w-1.5 h-1.5 bg-[#3F5B6F] rounded-full mt-2 flex-shrink-0" />
+                  <span>Profesional responsable del cierre.</span>
+                </li>
+
+                <li className="flex items-start gap-2">
+                  <div className="w-1.5 h-1.5 bg-[#3F5B6F] rounded-full mt-2 flex-shrink-0" />
+                  <span>Estado operativo de los equipos.</span>
+                </li>
+
+                <li className="flex items-start gap-2">
+                  <div className="w-1.5 h-1.5 bg-[#3F5B6F] rounded-full mt-2 flex-shrink-0" />
+                  <span>Incidencias detectadas durante el turno.</span>
+                </li>
+
+                <li className="flex items-start gap-2">
+                  <div className="w-1.5 h-1.5 bg-[#3F5B6F] rounded-full mt-2 flex-shrink-0" />
+                  <span>Necesidades de mantenimiento o revisión técnica.</span>
+                </li>
+              </ul>
+
+              {/* Imagen */}
+              <img
+                src={"public/images/Cierre.png"}
+                alt="Cierre instalación"
+                className="w-55 rounded-2xl shadow-md object-cover"
+              />
+
+            </div>
 
             <p>
               Asimismo, el personal técnico debe recoger y ordenar el material utilizado durante la actividad diaria y realizar
