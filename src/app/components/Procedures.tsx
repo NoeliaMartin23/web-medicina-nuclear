@@ -1,8 +1,11 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { ArrowLeft, Radar, Trash2 } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+<<<<<<< HEAD
 import protocolosIcono from '../../assets/protocolos-icono.svg';
 import type { SearchEntry } from '../searchTypes';
+=======
+>>>>>>> f4e9b8f40af0a842a44917bf9954b7ae223df618
 
 interface ProcedureItem {
   id: string;
@@ -86,6 +89,7 @@ const procedures: ProcedureItem[] = [
   }
 ];
 
+<<<<<<< HEAD
 export const proceduresSearchEntries: SearchEntry[] = procedures.map((procedure) => ({
   id: `search-${procedure.id}`,
   sectionId: 'procedimientos',
@@ -96,6 +100,8 @@ export const proceduresSearchEntries: SearchEntry[] = procedures.map((procedure)
   resultType: 'subsection',
 }));
 
+=======
+>>>>>>> f4e9b8f40af0a842a44917bf9954b7ae223df618
 export function Procedures({ selectedSubSectionId = null, onBackToOverview }: ProceduresProps) {
   const [activeProcedureId, setActiveProcedureId] = useState<string | null>(selectedSubSectionId);
 
@@ -155,10 +161,14 @@ export function Procedures({ selectedSubSectionId = null, onBackToOverview }: Pr
     <section className="py-16 px-6">
       <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
         <div className="mb-12">
+<<<<<<< HEAD
           <div className="flex items-center gap-3 mb-3">
             <img src={protocolosIcono} alt="" className="w-16 h-16 object-contain flex-shrink-0" aria-hidden="true" />
             <h2 className="text-gray-900 dark:text-white">Protocolos PR</h2>
           </div>
+=======
+          <h2 className="text-gray-900 dark:text-white mb-3">Protocolos PR</h2>
+>>>>>>> f4e9b8f40af0a842a44917bf9954b7ae223df618
           <p className="text-gray-600 dark:text-gray-300">
             Selecciona una subseccion para abrir su ventana con informacion completa.
           </p>

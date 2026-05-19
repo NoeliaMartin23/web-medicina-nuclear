@@ -128,10 +128,13 @@
     @apply bg-background text-foreground;
   }
 
+<<<<<<< HEAD
   p {
     text-align: justify;
   }
 
+=======
+>>>>>>> f4e9b8f40af0a842a44917bf9954b7ae223df618
   html {
     font-size: var(--font-size);
   }

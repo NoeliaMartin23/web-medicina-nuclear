@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect, useMemo } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { Menu, Search, Sun, Moon, Instagram, Linkedin, Languages, X, ChevronDown, ChevronUp, Youtube } from 'lucide-react';
 import { Introduction } from './components/Introduction';
 import { Equipment } from './components/Equipment';
@@ -11,7 +11,6 @@ import { Closure } from './components/Closure';
 import { ResumenConclusiones } from './components/ResumenConclusiones';
 import { References } from './components/References';
 import { ImageWithFallback } from './components/figma/ImageWithFallback';
-import { searchSite, type SearchResult as SiteSearchResult } from './search';
 
 type Section = 'introduccion' | 'equipamiento' | 'material' | 'protocolos' | 'actividades' | 'procedimientos' | 'documentacion' | 'cierre' | 'resumen-conclusiones' | 'referencias';
 
@@ -24,7 +23,6 @@ interface MenuItem {
   id: Section;
   label: string;
   shortLabel?: string;
-  sidebarLabel?: string;
   subItems?: SubMenuItem[];
 }
 
@@ -35,18 +33,15 @@ export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedMenuItems, setExpandedMenuItems] = useState<Section[]>([]);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [highlightedSearchResultIndex, setHighlightedSearchResultIndex] = useState(0);
+  const [searchResults, setSearchResults] = useState<string[]>([]);
+  const [isSearching, setIsSearching] = useState(false);
   const [hoveredMenuItem, setHoveredMenuItem] = useState<Section | null>(null);
   const [popupPosition, setPopupPosition] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const searchContainerRef = useRef<HTMLDivElement | null>(null);
   const [showLanguageMenu, setShowLanguageMenu] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('Español');
 
   const languages = ['Español', 'English', 'Português', 'Français', 'Italiano', 'Deutsch'];
-  const searchResults = useMemo(() => searchSite(searchQuery, 8), [searchQuery]);
-  const showSearchResults = isSearchOpen && searchQuery.trim() !== '';
 
   const menuItems: MenuItem[] = [
     { 
@@ -84,7 +79,6 @@ export default function App() {
     { 
       id: 'actividades', 
       label: 'Actividades',
-      sidebarLabel: 'Actividades de mantenimiento',
       subItems: [
         { id: 'actividades-generador', label: 'Generador' },
         { id: 'actividades-activimetro', label: 'Activímetro' }
@@ -110,7 +104,6 @@ export default function App() {
     { 
       id: 'cierre', 
       label: 'Cierre',
-      sidebarLabel: 'Cierre de la instalación',
       subItems: []
     },
     { 
@@ -204,7 +197,8 @@ export default function App() {
         : null
     );
     setIsSidebarOpen(false);
-    setIsSearchOpen(false);
+    setIsSearching(false);
+    setSearchResults([]);
   };
 
   const handleMenuEnter = useCallback((itemId: Section, e: React.MouseEvent<HTMLDivElement>) => {
@@ -238,69 +232,33 @@ export default function App() {
     );
   };
 
-  useEffect(() => {
-    if (!showSearchResults) {
-      setHighlightedSearchResultIndex(0);
-    }
-  }, [showSearchResults]);
-
-  useEffect(() => {
-    const handleDocumentClick = (event: MouseEvent) => {
-      if (!searchContainerRef.current?.contains(event.target as Node)) {
-        setIsSearchOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleDocumentClick);
-
-    return () => {
-      document.removeEventListener('mousedown', handleDocumentClick);
-    };
-  }, []);
-
   const handleSearch = (query: string) => {
     setSearchQuery(query);
-    setIsSearchOpen(query.trim() !== '');
-    setHighlightedSearchResultIndex(0);
-  };
-
-  const handleSearchResultSelect = (result: SiteSearchResult) => {
-    handleSectionChange(result.sectionId as Section, result.subSectionId ?? null);
-    setSearchQuery('');
-    setIsSearchOpen(false);
-    setHighlightedSearchResultIndex(0);
-  };
-
-  const handleSearchKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!showSearchResults) {
-      if (event.key === 'ArrowDown' && searchResults.length > 0) {
-        event.preventDefault();
-        setIsSearchOpen(true);
-      }
-
+    
+    if (query.trim() === '') {
+      setIsSearching(false);
+      setSearchResults([]);
       return;
     }
 
-    if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      setHighlightedSearchResultIndex((currentIndex) =>
-        Math.min(currentIndex + 1, searchResults.length - 1)
-      );
-    }
-
-    if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      setHighlightedSearchResultIndex((currentIndex) => Math.max(currentIndex - 1, 0));
-    }
-
-    if (event.key === 'Enter' && searchResults.length > 0) {
-      event.preventDefault();
-      handleSearchResultSelect(searchResults[highlightedSearchResultIndex] ?? searchResults[0]);
-    }
-
-    if (event.key === 'Escape') {
-      setIsSearchOpen(false);
-    }
+    setIsSearching(true);
+    
+    const results: string[] = [];
+    const queryLower = query.toLowerCase();
+    
+    menuItems.forEach(item => {
+      if (item.label.toLowerCase().includes(queryLower)) {
+        results.push(`${item.label} (Sección)`);
+      }
+      
+      item.subItems?.forEach(subItem => {
+        if (subItem.label.toLowerCase().includes(queryLower)) {
+          results.push(`${item.label} > ${subItem.label}`);
+        }
+      });
+    });
+    
+    setSearchResults(results);
   };
 
   const handleLanguageChange = (language: string) => {
@@ -362,67 +320,33 @@ export default function App() {
               {/* Controls - Right */}
               <div className="flex items-center gap-4">
                 {/* Search */}
-                <div className="relative" ref={searchContainerRef}>
+                <div className="relative">
                   <input
                     type="text"
                     placeholder="Buscar..."
                     value={searchQuery}
                     onChange={(e) => handleSearch(e.target.value)}
-                    onFocus={() => {
-                      if (searchQuery.trim() !== '') {
-                        setIsSearchOpen(true);
-                      }
-                    }}
-                    onKeyDown={handleSearchKeyDown}
                     className="w-64 pl-10 pr-4 py-2 rounded-lg border border-white/20 bg-white/10 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-[#F5B494]"
                   />
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/60" />
                   
                   {/* Search Results Dropdown */}
-                  {showSearchResults && searchResults.length > 0 && (
-                    <div className="absolute top-full mt-2 w-[28rem] max-w-[80vw] bg-white rounded-lg shadow-xl border border-gray-200 max-h-96 overflow-y-auto z-50">
-                      <div className="px-4 py-3 border-b border-gray-100">
-                        <p className="text-xs uppercase tracking-wide text-gray-500">
-                          {searchResults.length} resultado{searchResults.length === 1 ? '' : 's'}
-                        </p>
-                      </div>
+                  {isSearching && searchResults.length > 0 && (
+                    <div className="absolute top-full mt-2 w-full bg-white rounded-lg shadow-xl border border-gray-200 max-h-80 overflow-y-auto z-50">
                       {searchResults.map((result, index) => (
-                        <button
-                          key={result.id}
-                          type="button"
-                          onClick={() => handleSearchResultSelect(result)}
-                          className={`w-full px-4 py-3 text-left border-b border-gray-100 last:border-b-0 transition-colors ${
-                            highlightedSearchResultIndex === index ? 'bg-blue-50' : 'hover:bg-gray-50'
-                          }`}
+                        <div
+                          key={index}
+                          className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700 text-sm border-b border-gray-100 last:border-b-0"
                         >
-                          <div className="flex items-start justify-between gap-3">
-                            <div className="min-w-0">
-                              <p className="text-sm font-medium text-gray-900">{result.title}</p>
-                              <p className="text-xs text-gray-500 mt-1">
-                                {result.sectionLabel}
-                                {result.subSectionId ? ' · Subapartado' : ' · Sección'}
-                              </p>
-                            </div>
-                            <span className="px-2 py-1 rounded-full bg-gray-100 text-[11px] font-medium text-gray-600 whitespace-nowrap">
-                              {result.resultType === 'reference'
-                                ? 'Referencia'
-                                : result.subSectionId
-                                  ? 'Coincidencia'
-                                  : 'Sección'}
-                            </span>
-                          </div>
-                          <p className="text-xs text-gray-600 mt-2 leading-relaxed">{result.excerpt}</p>
-                        </button>
+                          {result}
+                        </div>
                       ))}
                     </div>
                   )}
                   
-                  {showSearchResults && searchResults.length === 0 && (
-                    <div className="absolute top-full mt-2 w-[28rem] max-w-[80vw] bg-white rounded-lg shadow-xl border border-gray-200 p-4 z-50">
-                      <p className="text-gray-700 text-sm font-medium">No se encontraron coincidencias</p>
-                      <p className="text-gray-500 text-xs mt-1">
-                        Prueba con términos como PET, radiofármacos, activímetro, protección radiológica o incidencias.
-                      </p>
+                  {isSearching && searchResults.length === 0 && searchQuery.trim() !== '' && (
+                    <div className="absolute top-full mt-2 w-full bg-white rounded-lg shadow-xl border border-gray-200 p-4 z-50">
+                      <p className="text-gray-500 text-sm">No se encontraron resultados</p>
                     </div>
                   )}
                 </div>
@@ -582,7 +506,7 @@ export default function App() {
                             : 'text-[#F5B494] hover:bg-white/10'
                         }`}
                       >
-                        {item.sidebarLabel || item.label}
+                        {item.label}
                       </button>
                       
                       {/* Toggle Submenu Button */}

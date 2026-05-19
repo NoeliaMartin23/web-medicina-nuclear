@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Gestión Integral del Servicio de Medicina Nuclear
+=======
+# Medicina Nuclear - Mantenimiento de Equipos
+>>>>>>> f4e9b8f40af0a842a44917bf9954b7ae223df618
 
 Página web sobre mantenimiento de equipos de Medicina Nuclear. Incluye información sobre equipamiento, materiales, protocolos, procedimientos y documentación técnica.
 

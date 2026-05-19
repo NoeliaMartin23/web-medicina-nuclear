@@ -3,10 +3,20 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+<<<<<<< HEAD
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview"
+=======
+  "homepage": "https://noeliamartin23.github.io/web-medicina-nuclear",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "npx gh-pages -d dist"
+>>>>>>> f4e9b8f40af0a842a44917bf9954b7ae223df618
   },
   "dependencies": {
     "react": "^18.3.1",

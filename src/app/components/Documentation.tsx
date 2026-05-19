@@ -1,8 +1,11 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { ArrowLeft, AlertTriangle, Archive } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+<<<<<<< HEAD
 import documentacionIcono from '../../assets/documentacion-icono.svg';
 import type { SearchEntry } from '../searchTypes';
+=======
+>>>>>>> f4e9b8f40af0a842a44917bf9954b7ae223df618
 
 interface DocumentItem {
   id: string;
@@ -86,6 +89,7 @@ const documents: DocumentItem[] = [
   }
 ];
 
+<<<<<<< HEAD
 export const documentationSearchEntries: SearchEntry[] = documents.map((document) => ({
   id: `search-${document.id}`,
   sectionId: 'documentacion',
@@ -96,6 +100,8 @@ export const documentationSearchEntries: SearchEntry[] = documents.map((document
   resultType: 'subsection',
 }));
 
+=======
+>>>>>>> f4e9b8f40af0a842a44917bf9954b7ae223df618
 export function Documentation({ selectedSubSectionId = null, onBackToOverview }: DocumentationProps) {
   const [activeDocumentationId, setActiveDocumentationId] = useState<string | null>(selectedSubSectionId);
 
@@ -155,10 +161,14 @@ export function Documentation({ selectedSubSectionId = null, onBackToOverview }:
     <section className="py-16 px-6">
       <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
         <div className="mb-12">
+<<<<<<< HEAD
           <div className="flex items-center gap-3 mb-3">
             <img src={documentacionIcono} alt="" className="w-16 h-16 object-contain flex-shrink-0" aria-hidden="true" />
             <h2 className="text-gray-900 dark:text-white">Documentación</h2>
           </div>
+=======
+          <h2 className="text-gray-900 dark:text-white mb-3">Documentación</h2>
+>>>>>>> f4e9b8f40af0a842a44917bf9954b7ae223df618
           <p className="text-gray-600 dark:text-gray-300">
             Selecciona una subsección para abrir su ventana con información completa.
           </p>

@@ -1,12 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, FileText, CircleCheck } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import resumenConclusionesIcono from '../../assets/resumen-conclusiones-icono.svg';
-import resumenLogo from '../../assets/resumen-logo.svg';
-import conclusionesLogo from '../../assets/conclusiones-logo.svg';
-import resumenCover from '../../assets/resumen-cover.svg';
-import conclusionesCover from '../../assets/conclusiones-cover.svg';
-import type { SearchEntry } from '../searchTypes';
 
 interface SummaryConclusionItem {
   id: string;
@@ -51,12 +45,10 @@ function ResumenConclusionesButton({ item, onOpen }: ResumenConclusionesButtonPr
         />
       </div>
       <div className="p-6">
-        <div className="flex items-center gap-4 mb-4">
-          <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center shrink-0">
-            {item.icon}
-          </div>
-          <h3 className="text-gray-900 dark:text-white text-xl">{item.title}</h3>
+        <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mb-4">
+          {item.icon}
         </div>
+        <h3 className="text-gray-900 dark:text-white text-xl mb-3">{item.title}</h3>
         <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">{item.summary}</p>
       </div>
     </div>
@@ -67,41 +59,30 @@ const summaryConclusionItems: SummaryConclusionItem[] = [
   {
     id: 'resumen-ejecutivo',
     title: 'Resumen',
-    summary: '',
-    icon: <img src={resumenLogo} alt="" className="w-6 h-6 object-contain" aria-hidden="true" />,
-    image: resumenCover,
+    summary: 'Síntesis de los puntos clave del programa de mantenimiento en medicina nuclear.',
+    icon: <FileText className="w-5 h-5 text-blue-600" />,
+    image:
+      'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
     details: [
-      'El trabajo se centra en el mantenimiento de los equipos y del material utilizado en una instalación de Medicina Nuclear, destacando la importancia de garantizar la seguridad, el correcto funcionamiento técnico y la calidad diagnóstica de las exploraciones realizadas.',
-      'En primer lugar, se ha estudiado el equipamiento principal presente en una unidad de Medicina Nuclear, incluyendo gammacámaras, PET-TC, activímetros, generadores y diferentes accesorios necesarios para la adquisición y procesamiento de imágenes diagnósticas. También, se ha descrito el material de la sala de exploración, diferenciando entre material fungible y no fungible, así como las medidas necesarias para su conservación, limpieza y reposición.',
-      'Además, se han analizado las condiciones de mantenimiento preventivo y correctivo de los equipos, destacando la necesidad de realizar revisiones periódicas para evitar averías y asegurar un funcionamiento preciso, estable y seguro. Tmabién, se ha abordado el procedimiento de cierre de la instalación, incluyendo las verificaciones finales de seguridad, desconexión de equipos y control radiológico del área.',
-      'Por otra parte, el trabajo contempla la relevancia de la protección radiológica dentro de Medicina Nuclear, tanto para los trabajadores como para los pacientes y el medio ambiente.',
-      'Por último, se desarrollan las medidas de protección radiológica, el monitoreo de contaminación y la gestión de residuos radiactivos, junto con la documentación necesaria para el registro de averías, incidencias, mantenimiento y reposición de fuentes radiactivas dentro de la instalación.'
+      'Esta subsección ofrece un resumen ejecutivo del programa de mantenimiento, enfocándose en los elementos que sostienen la seguridad y continuidad asistencial.',
+      'Se prioriza el mantenimiento preventivo programado, la aplicación de protocolos de protección radiológica y la verificación continua de parámetros críticos.',
+      'La coordinación entre equipamiento, protocolos operativos y documentación técnica permite reducir fallos, mejorar tiempos de respuesta y fortalecer la trazabilidad del servicio.'
     ]
   },
   {
     id: 'conclusiones-finales',
     title: 'Conclusiones',
-    summary: '',
-    icon: <img src={conclusionesLogo} alt="" className="w-6 h-6 object-contain" aria-hidden="true" />,
-    image: conclusionesCover,
+    summary: 'Conclusiones finales sobre impacto, seguridad y sostenibilidad del mantenimiento.',
+    icon: <CircleCheck className="w-5 h-5 text-blue-600" />,
+    image:
+      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
     details: [
-      'El mantenimiento de los equipos y del material de una instalación de Medicina Nuclear constituye una actividad fundamental para garantizar exploraciones diagnósticas seguras, precisas y de calidad. El correcto estado de los equipos no solo influye en la obtención de imágenes fiables, sino también en la seguridad del paciente, del personal sanitario y del entorno de trabajo.',
-      'A lo largo del trabajo se ha podido comprobar que los procedimientos de mantenimiento preventivo permiten detectar fallos antes de que afecten al funcionamiento de los sistemas, reduciendo tiempos de inactividad y evitando posibles riesgos radiológicos. Asimismo, la adecuada organización del material de la sala y el cumplimiento de los protocolos de cierre favorecen un entorno de trabajo más eficiente, controlado y seguro.',
-      'También se concluye que la protección radiológica tiene un papel esencial dentro de Medicina Nuclear, ya que el uso de sustancias radiactivas requiere controles estrictos y continuos para minimizar la exposición innecesaria. Por ello, los controles de calidad y la vigilancia radiológica deben realizarse de manera periódica, rigurosa y documentada.',
-      'Por último, este trabajo permite comprender la gran responsabilidad técnica y sanitaria asociada al mantenimiento de una instalación de Medicina Nuclear. La futura incorporación de los protocolos específicos de control de calidad, gestión de residuos y documentación técnica completará una visión más global, profesional y especializada del funcionamiento integral de este tipo de servicios hospitalarios.'
+      'La implementación de un programa integral de mantenimiento es esencial para garantizar operatividad técnica, seguridad clínica y cumplimiento normativo.',
+      'El cumplimiento riguroso de los protocolos establecidos protege al personal y a los pacientes, y mantiene la calidad de los resultados diagnósticos y terapéuticos.',
+      'La inversión sostenida en mantenimiento representa una decisión estratégica para prolongar la vida útil de los equipos y asegurar la sostenibilidad del servicio.'
     ]
   }
 ];
-
-export const summaryConclusionSearchEntries: SearchEntry[] = summaryConclusionItems.map((item) => ({
-  id: `search-${item.id}`,
-  sectionId: 'resumen-conclusiones',
-  subSectionId: item.id,
-  sectionLabel: 'Resumen y Conclusiones',
-  title: item.title,
-  content: `${item.summary} ${item.details.join(' ')}`,
-  resultType: 'subsection',
-}));
 
 export function ResumenConclusiones({
   selectedSubSectionId = null,
@@ -136,7 +117,19 @@ export function ResumenConclusiones({
 
           <div className="mb-6">
             <h2 className="text-gray-900 dark:text-white mb-2">{selectedItem.title}</h2>
+            <p className="text-gray-600 dark:text-gray-300">
+              Información detallada de la subsección seleccionada.
+            </p>
           </div>
+
+          <div className="mb-6 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+            <ImageWithFallback
+              src={selectedItem.image}
+              alt={selectedItem.title}
+              className="w-full max-h-[420px] object-cover block"
+            />
+          </div>
+
           <div className="space-y-4">
             {selectedItem.details.map((paragraph, index) => (
               <p key={index} className="text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -153,10 +146,10 @@ export function ResumenConclusiones({
     <section className="py-16 px-6">
       <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
         <div className="mb-12">
-          <div className="flex items-center gap-3 mb-3">
-            <img src={resumenConclusionesIcono} alt="" className="w-16 h-16 object-contain flex-shrink-0" aria-hidden="true" />
-            <h2 className="text-gray-900 dark:text-white">Resumen y Conclusiones</h2>
-          </div>
+          <h2 className="text-gray-900 dark:text-white mb-3">Resumen y Conclusiones</h2>
+          <p className="text-gray-600 dark:text-gray-300">
+            Selecciona una subsección para abrir su ventana con información completa.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
