@@ -84,6 +84,16 @@ const summaryConclusionItems: SummaryConclusionItem[] = [
   }
 ];
 
+export const summaryConclusionSearchEntries = summaryConclusionItems.map((item) => ({
+  id: `search-${item.id}`,
+  sectionId: 'resumen-conclusiones' as const,
+  subSectionId: item.id,
+  sectionLabel: 'Resumen y Conclusiones',
+  title: item.title,
+  content: `${item.summary} ${item.details.join(' ')}`,
+  resultType: 'subsection' as const,
+}));
+
 export function ResumenConclusiones({
   selectedSubSectionId = null,
   onBackToOverview

@@ -1,11 +1,8 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { ArrowLeft, Radar, Trash2 } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-<<<<<<< HEAD
 import protocolosIcono from '../../assets/protocolos-icono.svg';
 import type { SearchEntry } from '../searchTypes';
-=======
->>>>>>> f4e9b8f40af0a842a44917bf9954b7ae223df618
 
 interface ProcedureItem {
   id: string;
@@ -64,32 +61,31 @@ const procedures: ProcedureItem[] = [
   {
     id: 'procedimientos-monitoreo',
     title: 'Monitoreo de área y contaminación',
-    summary: 'Protocolos de vigilancia radiologica para control de niveles de area y deteccion temprana de contaminacion.',
+    summary: 'Protocolos de vigilancia radiológica para control de niveles de área y detección temprana de contaminación.',
     icon: <Radar className="w-5 h-5 text-blue-600" />,
     image:
       'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
     details: [
-      'El monitoreo de area y contaminacion se realiza de forma sistematica antes, durante y despues de la actividad clinica.',
-      'Incluye control de superficies, puntos criticos y zonas de circulacion para detectar incrementos no esperados de radiacion.',
-      'Los resultados se registran en planillas de seguimiento y, ante desviaciones, se aplican acciones de descontaminacion y verificacion.'
+      'El monitoreo de área y contaminación se realiza de forma sistemática antes, durante y después de la actividad clínica.',
+      'Incluye control de superficies, puntos críticos y zonas de circulación para detectar incrementos no esperados de radiación.',
+      'Los resultados se registran en planillas de seguimiento y, ante desviaciones, se aplican acciones de descontaminación y verificación.'
     ]
   },
   {
     id: 'procedimientos-gestion',
     title: 'Gestión de residuos radioactivos',
-    summary: 'Procedimientos para segregacion, almacenamiento temporal y eliminacion segura de residuos segun normativa.',
+    summary: 'Procedimientos para segregación, almacenamiento temporal y eliminación segura de residuos según normativa.',
     icon: <Trash2 className="w-5 h-5 text-blue-600" />,
     image:
       'https://images.unsplash.com/photo-1605201107820-951659ec034e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
     details: [
-      'La gestion de residuos radioactivos contempla clasificacion por tipo, actividad y periodo de semidesintegracion.',
+      'La gestión de residuos radioactivos contempla clasificación por tipo, actividad y periodo de semidesintegración.',
       'El almacenamiento temporal se realiza en contenedores identificados, con control de acceso y trazabilidad documental completa.',
-      'La retirada o liberacion del residuo se ejecuta segun protocolo interno y marco normativo vigente, con registro de cada etapa.'
+      'La retirada o liberación del residuo se ejecuta según protocolo interno y marco normativo vigente, con registro de cada etapa.'
     ]
   }
 ];
 
-<<<<<<< HEAD
 export const proceduresSearchEntries: SearchEntry[] = procedures.map((procedure) => ({
   id: `search-${procedure.id}`,
   sectionId: 'procedimientos',
@@ -100,8 +96,6 @@ export const proceduresSearchEntries: SearchEntry[] = procedures.map((procedure)
   resultType: 'subsection',
 }));
 
-=======
->>>>>>> f4e9b8f40af0a842a44917bf9954b7ae223df618
 export function Procedures({ selectedSubSectionId = null, onBackToOverview }: ProceduresProps) {
   const [activeProcedureId, setActiveProcedureId] = useState<string | null>(selectedSubSectionId);
 
@@ -133,7 +127,7 @@ export function Procedures({ selectedSubSectionId = null, onBackToOverview }: Pr
           <div className="mb-6">
             <h2 className="text-gray-900 dark:text-white mb-2">{selectedProcedure.title}</h2>
             <p className="text-gray-600 dark:text-gray-300">
-              Informacion detallada de la subseccion seleccionada.
+              Información detallada de la subsección seleccionada.
             </p>
           </div>
 
@@ -161,16 +155,12 @@ export function Procedures({ selectedSubSectionId = null, onBackToOverview }: Pr
     <section className="py-16 px-6">
       <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
         <div className="mb-12">
-<<<<<<< HEAD
           <div className="flex items-center gap-3 mb-3">
             <img src={protocolosIcono} alt="" className="w-16 h-16 object-contain flex-shrink-0" aria-hidden="true" />
             <h2 className="text-gray-900 dark:text-white">Protocolos PR</h2>
           </div>
-=======
-          <h2 className="text-gray-900 dark:text-white mb-3">Protocolos PR</h2>
->>>>>>> f4e9b8f40af0a842a44917bf9954b7ae223df618
           <p className="text-gray-600 dark:text-gray-300">
-            Selecciona una subseccion para abrir su ventana con informacion completa.
+            Selecciona una subsección para abrir su ventana con información completa.
           </p>
         </div>
 

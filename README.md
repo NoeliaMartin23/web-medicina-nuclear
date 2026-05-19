@@ -1,132 +1,60 @@
-<<<<<<< HEAD
 # Gestión Integral del Servicio de Medicina Nuclear
-=======
-# Medicina Nuclear - Mantenimiento de Equipos
->>>>>>> f4e9b8f40af0a842a44917bf9954b7ae223df618
 
 Página web sobre mantenimiento de equipos de Medicina Nuclear. Incluye información sobre equipamiento, materiales, protocolos, procedimientos y documentación técnica.
 
 ## Tecnologías
 
 - **React 18** + **TypeScript**
-- **Vite** (bundler)
+- **Vite**
 - **Tailwind CSS v4**
-- **Lucide React** (iconos)
+- **Lucide React**
 
 ## Desarrollo local
 
 ```bash
-# Instalar dependencias
 npm install
-
-# Iniciar servidor de desarrollo
 npm run dev
-
-# Construir para producción
 npm run build
-
-# Previsualizar build de producción
 npm run preview
 ```
-
-## Despliegue en GitLab Pages
-
-El proyecto incluye un archivo `.gitlab-ci.yml` que automáticamente:
-
-1. Instala dependencias
-2. Construye el proyecto
-3. Despliega en GitLab Pages
-
-### Pasos para desplegar en GitLab:
-
-1. Crea un nuevo proyecto en GitLab
-2. **Importante**: Ajusta el `base` en `vite.config.ts` con el nombre de tu proyecto:
-   ```typescript
-   base: process.env.CI ? '/NOMBRE-DE-TU-PROYECTO/' : '/',
-   ```
-3. Sube este código al repositorio:
-   ```bash
-   git init
-   git remote add origin https://gitlab.com/TU_USUARIO/NOMBRE-PROYECTO.git
-   git add .
-   git commit -m "Initial commit - Medicina Nuclear website"
-   git push -u origin main
-   ```
-4. Ve a **Settings > Pages** en GitLab
-5. El pipeline de CI/CD se ejecutará automáticamente
-6. La página estará disponible en: `https://TU_USUARIO.gitlab.io/NOMBRE-PROYECTO`
 
 ## Despliegue en GitHub Pages
 
-El proyecto incluye un workflow de GitHub Actions (`.github/workflows/deploy.yml`) que automáticamente construye y despliega.
+El proyecto incluye un workflow de GitHub Actions en `.github/workflows/deploy.yml`.
 
-### Pasos para desplegar en GitHub:
+### Requisitos
 
-1. Crea un nuevo repositorio en GitHub
-2. **Importante**: Ajusta el `base` en `vite.config.ts` con el nombre de tu repositorio:
-   ```typescript
-   base: process.env.CI ? '/nombre-repositorio/' : '/',
-   ```
-3. Sube el código:
-   ```bash
-   git init
-   git remote add origin https://github.com/TU_USUARIO/nombre-repositorio.git
-   git add .
-   git commit -m "Initial commit"
-   git push -u origin main
-   ```
-4. Ve a **Settings > Pages** en GitHub
-5. En **Source** selecciona: **GitHub Actions**
-6. El workflow se ejecutará automáticamente al hacer push
-7. La página estará disponible en: `https://TU_USUARIO.github.io/nombre-repositorio`
+1. El repositorio debe usar la rama `main`.
+2. En **Settings → Pages**, la fuente debe ser **GitHub Actions**.
+3. El workflow construye el proyecto con Node 20 y publica `dist/`.
 
-## Desarrollo local SIN Docker (instalando Node.js)
+### Base path
 
-Si prefieres no usar Docker y tienes Node.js 20+ instalado:
+La base de Vite se resuelve automáticamente así:
 
-```bash
-# Instalar dependencias
-npm install
+- `VITE_BASE_PATH` si está definida
+- `/${repo}/` en CI
+- `/` en local
 
-# Iniciar servidor de desarrollo
-npm run dev
-
-# Construir para producción
-npm run build
-
-# Previsualizar build de producción
-npm run preview
-```
+Por tanto, para GitHub Pages **NO hace falta editar manualmente** `vite.config.ts` cuando el repositorio cambia de nombre, salvo que quieras forzar un path distinto.
 
 ## Estructura del proyecto
 
-```
-├── .gitlab-ci.yml          # Pipeline CI/CD para GitLab Pages
-├── index.html              # Punto de entrada HTML
-├── package.json            # Dependencias y scripts
-├── tsconfig.json           # Configuración TypeScript
-├── vite.config.ts          # Configuración de Vite
-├── public/                 # Archivos estáticos
-│   └── favicon.svg
+```text
+├── .github/workflows/deploy.yml
+├── index.html
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+├── public/
+│   ├── favicon.svg
+│   └── images/
 └── src/
-    ├── main.tsx            # Punto de entrada React
+    ├── main.tsx
+    ├── assets/
     ├── app/
-    │   ├── App.tsx         # Componente principal
-    │   └── components/     # Componentes de sección
-    │       ├── Activities.tsx
-    │       ├── Closure.tsx
-    │       ├── Documentation.tsx
-    │       ├── Equipment.tsx
-    │       ├── Introduction.tsx
-    │       ├── Material.tsx
-    │       ├── Procedures.tsx
-    │       ├── Protocols.tsx
-    │       ├── References.tsx
-    │       └── figma/
-    │           └── ImageWithFallback.tsx
+    │   ├── App.tsx
+    │   ├── searchTypes.ts
+    │   └── components/
     └── styles/
-        ├── index.css
-        ├── fonts.css
-        ├── tailwind.css
-        └── theme.css
 ```

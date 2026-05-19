@@ -1,11 +1,8 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { Package, Shield, Settings, ArrowLeft } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-<<<<<<< HEAD
 import materialIcono from '../../assets/material-icono.svg';
 import type { SearchEntry } from '../searchTypes';
-=======
->>>>>>> f4e9b8f40af0a842a44917bf9954b7ae223df618
 
 const baseUrl = import.meta.env.BASE_URL;
 
@@ -63,45 +60,44 @@ function MaterialButton({ item, onOpen }: MaterialButtonProps) {
 }
 
 const materials: MaterialItem[] = [
-    {
-      id: 'material-fungible',
-      title: "Material fungible",
-      summary: "Elementos de consumo habitual para la preparación y administración segura, con control continuo de stock, caducidades y trazabilidad.",
-      icon: <Package className="w-5 h-5 text-green-600" />,
-      image: `${baseUrl}images/imagen_material_fungible.png`,
-      details: [
-        'El material fungible agrupa insumos de un solo uso y de reposición frecuente en el flujo diario de medicina nuclear.',
-        'Su control incluye inventario mínimo, fechas de caducidad, condiciones de almacenamiento y trazabilidad por procedimiento.',
-        'La reposición planificada reduce interrupciones, evita faltantes críticos y mantiene la seguridad del paciente y del personal.'
-      ]
-    },
-    {
-      id: 'material-no-fungible',
-      title: "Material no fungible",
-      summary: "Recursos reutilizables de soporte y protección que requieren revisión periódica de estado, limpieza y mantenimiento para garantizar su funcionamiento.",
-      icon: <Shield className="w-5 h-5 text-green-600" />,
-      image: `${baseUrl}images/imagen_material_nofungible.png`,
-      details: [
-        'El material no fungible comprende elementos reutilizables cuya integridad física y funcional debe verificarse de forma periódica.',
-        'La gestión contempla limpieza, desinfección, registro de incidencias y sustitución cuando se detecta desgaste o pérdida de prestaciones.',
-        'Una supervisión estructurada prolonga la vida útil de los recursos y garantiza condiciones operativas seguras.'
-      ]
-    },
-    {
-      id: 'material-preparacion',
-      title: "Preparación, Control y Reposición del material",
-      summary: "Gestión operativa del circuito de material: preparación previa, verificación durante la actividad y reposición al cierre para asegurar continuidad asistencial.",
-      icon: <Settings className="w-5 h-5 text-green-600" />,
-      image:
-        "https://images.unsplash.com/photo-1579154341098-e4e158cc7f55?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      details: [
-        'La preparación del material organiza los recursos necesarios antes del inicio de la jornada y de cada procedimiento.',
-        'El control operativo durante la actividad valida disponibilidad, estado y uso correcto de cada elemento según protocolo.',
-        'La reposición al cierre consolida inventarios, registra consumos y deja el área preparada para la continuidad asistencial.'
-      ]
-    }
-<<<<<<< HEAD
-  ];
+  {
+    id: 'material-fungible',
+    title: 'Material fungible',
+    summary: 'Elementos de consumo habitual para la preparación y administración segura, con control continuo de stock, caducidades y trazabilidad.',
+    icon: <Package className="w-5 h-5 text-green-600" />,
+    image: `${baseUrl}images/imagen_material_fungible.png`,
+    details: [
+      'El material fungible agrupa insumos de un solo uso y de reposición frecuente en el flujo diario de medicina nuclear.',
+      'Su control incluye inventario mínimo, fechas de caducidad, condiciones de almacenamiento y trazabilidad por procedimiento.',
+      'La reposición planificada reduce interrupciones, evita faltantes críticos y mantiene la seguridad del paciente y del personal.'
+    ]
+  },
+  {
+    id: 'material-no-fungible',
+    title: 'Material no fungible',
+    summary: 'Recursos reutilizables de soporte y protección que requieren revisión periódica de estado, limpieza y mantenimiento para garantizar su funcionamiento.',
+    icon: <Shield className="w-5 h-5 text-green-600" />,
+    image: `${baseUrl}images/imagen_material_nofungible.png`,
+    details: [
+      'El material no fungible comprende elementos reutilizables cuya integridad física y funcional debe verificarse de forma periódica.',
+      'La gestión contempla limpieza, desinfección, registro de incidencias y sustitución cuando se detecta desgaste o pérdida de prestaciones.',
+      'Una supervisión estructurada prolonga la vida útil de los recursos y garantiza condiciones operativas seguras.'
+    ]
+  },
+  {
+    id: 'material-preparacion',
+    title: 'Preparación, Control y Reposición del material',
+    summary: 'Gestión operativa del circuito de material: preparación previa, verificación durante la actividad y reposición al cierre para asegurar continuidad asistencial.',
+    icon: <Settings className="w-5 h-5 text-green-600" />,
+    image:
+      'https://images.unsplash.com/photo-1579154341098-e4e158cc7f55?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    details: [
+      'La preparación del material organiza los recursos necesarios antes del inicio de la jornada y de cada procedimiento.',
+      'El control operativo durante la actividad valida disponibilidad, estado y uso correcto de cada elemento según protocolo.',
+      'La reposición al cierre consolida inventarios, registra consumos y deja el área preparada para la continuidad asistencial.'
+    ]
+  }
+];
 
 export const materialSearchEntries: SearchEntry[] = materials.map((material) => ({
   id: `search-${material.id}`,
@@ -112,9 +108,6 @@ export const materialSearchEntries: SearchEntry[] = materials.map((material) => 
   content: `${material.summary} ${material.details.join(' ')}`,
   resultType: 'subsection',
 }));
-=======
-];
->>>>>>> f4e9b8f40af0a842a44917bf9954b7ae223df618
 
 export function Material({ selectedSubSectionId = null, onBackToOverview }: MaterialProps) {
   const [activeMaterialId, setActiveMaterialId] = useState<string | null>(selectedSubSectionId);
@@ -175,14 +168,10 @@ export function Material({ selectedSubSectionId = null, onBackToOverview }: Mate
     <section className="py-16 px-6">
       <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
         <div className="mb-12">
-<<<<<<< HEAD
           <div className="flex items-center gap-3 mb-3">
             <img src={materialIcono} alt="" className="w-16 h-16 object-contain flex-shrink-0" aria-hidden="true" />
             <h2 className="text-gray-900 dark:text-white">Material</h2>
           </div>
-=======
-          <h2 className="text-gray-900 dark:text-white mb-3">Material</h2>
->>>>>>> f4e9b8f40af0a842a44917bf9954b7ae223df618
           <p className="text-gray-600 dark:text-gray-300">
             Subapartados de material con el mismo formato visual que equipamiento.
           </p>

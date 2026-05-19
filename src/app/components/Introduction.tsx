@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import type { SearchEntry } from '../searchTypes';
 import introduccionIcono from '../../assets/introduccion-icono.svg';
 
@@ -14,8 +13,6 @@ export const introductionSearchEntries: SearchEntry[] = [
   },
 ];
 
-=======
->>>>>>> f4e9b8f40af0a842a44917bf9954b7ae223df618
 export function Introduction() {
   const baseUrl = import.meta.env.BASE_URL;
 
@@ -23,19 +20,11 @@ export function Introduction() {
     <section className="py-16 px-6">
       <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
         <div className="flex items-center gap-3 mb-6">
-<<<<<<< HEAD
           <div className="w-16 h-16 flex items-center justify-center flex-shrink-0">
             <img
               src={introduccionIcono}
               alt="Icono de Introducción"
               className="w-16 h-16 object-contain flex-shrink-0"
-=======
-          <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center overflow-hidden">
-            <img
-              src={`${baseUrl}images/icono_introduccion.png`}
-              alt="Icono de Introducción"
-              className="w-9 h-9 object-contain"
->>>>>>> f4e9b8f40af0a842a44917bf9954b7ae223df618
             />
           </div>
           <h2 className="text-gray-900 dark:text-white">Introducción</h2>

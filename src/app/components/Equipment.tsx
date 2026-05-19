@@ -64,6 +64,16 @@ const acquisitionEquipment: EquipmentItem[] = [
   }
 ];
 
+export const equipmentSearchEntries = acquisitionEquipment.map((equipment) => ({
+  id: `search-${equipment.id}`,
+  sectionId: 'equipamiento' as const,
+  subSectionId: equipment.id,
+  sectionLabel: 'Equipamiento',
+  title: equipment.title,
+  content: `${equipment.summary} ${equipment.details.join(' ')}`,
+  resultType: 'subsection' as const,
+}));
+
 function EquipmentButton({ item, onOpen }: EquipmentButtonProps) {
   return (
     <button
