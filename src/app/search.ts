@@ -41,8 +41,8 @@ const sectionSearchEntries: SearchEntry[] = [
   {
     id: 'section-protocolos',
     sectionId: 'protocolos',
-    sectionLabel: 'Protocolos de Puesta en Marcha',
-    title: 'Protocolos de Puesta en Marcha',
+    sectionLabel: 'Protocolos de Puesta en Marcha de los Equipos',
+    title: 'Protocolos de Puesta en Marcha de los Equipos',
     content:
       'Protocolos PM de gammacámara y PET. Puesta en marcha, verificación, calibración, control de calidad y rendimiento diagnóstico.',
     resultType: 'section',

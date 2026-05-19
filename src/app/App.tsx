@@ -69,7 +69,7 @@ export default function App() {
     },
     { 
       id: 'protocolos', 
-      label: 'Protocolos de Puesta en Marcha',
+      label: 'Protocolos de Puesta en Marcha de los Equipos',
       shortLabel: 'Protocolos PM',
       subItems: [
         { id: 'protocolos-gammacamara', label: 'Gammacámara' },

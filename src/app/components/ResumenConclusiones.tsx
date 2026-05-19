@@ -155,9 +155,6 @@ export function ResumenConclusiones({
       <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
         <div className="mb-12">
           <h2 className="text-gray-900 dark:text-white mb-3">Resumen y Conclusiones</h2>
-                  <p className="text-black dark:text-white">
-            Selecciona una subsección para abrir su ventana con información completa.
-          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

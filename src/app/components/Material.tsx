@@ -351,9 +351,6 @@ export function Material({ selectedSubSectionId = null, onBackToOverview }: Mate
 
           <div className="mb-6">
             <h2 className="text-gray-900 dark:text-white mb-2">{selectedMaterial.title}</h2>
-                  <p className="text-black dark:text-white">
-              Información detallada de la subsección seleccionada.
-            </p>
           </div>
 
           <div className="mb-6 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">

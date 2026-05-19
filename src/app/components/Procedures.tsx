@@ -10,7 +10,7 @@ interface ProcedureItem {
   summary: string;
   icon: ReactNode;
   image: string;
-  details: string[];
+  details: ProcedureDetail[];
 }
 
 interface ProceduresProps {
@@ -22,6 +22,36 @@ interface ProcedureButtonProps {
   item: ProcedureItem;
   onOpen: (id: string) => void;
 }
+
+interface ProcedureDetail {
+  content: ReactNode;
+  plainText: string;
+  kind?: 'paragraph' | 'list';
+}
+
+const paragraph = (
+  content: ReactNode,
+  plainText?: string
+): ProcedureDetail => ({
+  content,
+  plainText: plainText ?? (typeof content === 'string' ? content : ''),
+  kind: 'paragraph',
+});
+
+const bulletList = (
+  items: ReactNode[],
+  plainTextItems: string[]
+): ProcedureDetail => ({
+  content: (
+    <ul className="list-disc pl-8 space-y-3 text-black dark:text-white leading-relaxed">
+      {items.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+  ),
+  plainText: plainTextItems.join(' '),
+  kind: 'list',
+});
 
 function ProcedureButton({ item, onOpen }: ProcedureButtonProps) {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -61,29 +91,59 @@ const procedures: ProcedureItem[] = [
   {
     id: 'procedimientos-monitoreo',
     title: 'Monitoreo de área y contaminación',
-    summary: 'Protocolos de vigilancia radiológica para control de niveles de área y detección temprana de contaminación.',
+    summary:
+      'Vigilancia radiológica de áreas y superficies para detectar niveles de exposición o contaminación radiactiva.',
     icon: <Radar className="w-5 h-5 text-blue-600" />,
     image:
       'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
     details: [
-      'El monitoreo de área y contaminación se realiza de forma sistemática antes, durante y después de la actividad clínica.',
-      'Incluye control de superficies, puntos críticos y zonas de circulación para detectar incrementos no esperados de radiación.',
-      'Los resultados se registran en planillas de seguimiento y, ante desviaciones, se aplican acciones de descontaminación y verificación.'
-    ]
+      paragraph(
+        'La unidad de Medicina Nuclear debe disponer de detectores de radiación ambiental para la vigilancia de área, así como de detectores de contaminación destinados a evaluar la posible presencia de material radiactivo en superficies y zonas de trabajo.'
+      ),
+
+      paragraph(
+        'Todos estos equipos deben someterse periódicamente a controles de calidad y verificaciones de funcionamiento, con el fin de garantizar mediciones fiables y seguras.'
+      ),
+
+      paragraph(
+        'Los detectores de radiación ambiental incorporan sistemas de alarma acústica que se activan cuando se superan los límites de exposición previamente establecidos, habitualmente en valores próximos a 10 μSv/h frente a radiación X, gamma o partículas beta.'
+      ),
+
+      paragraph(
+        'Por su parte, los detectores de contaminación permiten identificar y cuantificar la contaminación radiactiva producida por distintos radioisótopos.'
+      ),
+
+      paragraph(
+        <>
+          Los resultados obtenidos se expresan generalmente en Bq/cm<sup>2</sup>, unidad empleada para determinar el nivel de contaminación superficial presente en un área concreta.
+        </>,
+        'Los resultados obtenidos se expresan generalmente en Bq/cm2, unidad empleada para determinar el nivel de contaminación superficial presente en un área concreta.'
+      ),
+    ],
   },
+
   {
     id: 'procedimientos-gestion',
-    title: 'Gestión de residuos radioactivos',
-    summary: 'Procedimientos para segregación, almacenamiento temporal y eliminación segura de residuos según normativa.',
+    title: 'Gestión de residuos radiactivos',
+    summary:
+      'Clasificación, almacenamiento, señalización y control de residuos radiactivos generados en Medicina Nuclear.',
     icon: <Trash2 className="w-5 h-5 text-blue-600" />,
     image:
       'https://images.unsplash.com/photo-1605201107820-951659ec034e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
     details: [
-      'La gestión de residuos radioactivos contempla clasificación por tipo, actividad y periodo de semidesintegración.',
-      'El almacenamiento temporal se realiza en contenedores identificados, con control de acceso y trazabilidad documental completa.',
-      'La retirada o liberación del residuo se ejecuta según protocolo interno y marco normativo vigente, con registro de cada etapa.'
-    ]
-  }
+      paragraph(
+        'La gestión de residuos radiactivos en Medicina Nuclear engloba los procedimientos destinados a garantizar la protección del personal, los pacientes y el medio ambiente frente a las radiaciones ionizantes.'
+      ),
+
+      paragraph(
+        'Los residuos generados deben clasificarse según su estado físico, actividad y periodo de semidesintegración, almacenándose en contenedores específicos y correctamente señalizados hasta alcanzar niveles seguros para su eliminación.'
+      ),
+
+      paragraph(
+        'Los residuos sólidos, líquidos y gaseosos requieren medidas de manipulación y control específicas, así como un registro adecuado de su gestión y supervisión por parte del Servicio de Protección Radiológica.'
+      ),
+    ],
+  },
 ];
 
 export const proceduresSearchEntries: SearchEntry[] = procedures.map((procedure) => ({
@@ -92,7 +152,7 @@ export const proceduresSearchEntries: SearchEntry[] = procedures.map((procedure)
   subSectionId: procedure.id,
   sectionLabel: 'Protocolos de Protección Radiológica',
   title: procedure.title,
-  content: `${procedure.summary} ${procedure.details.join(' ')}`,
+  content: `${procedure.summary} ${procedure.details.map((detail) => detail.plainText).join(' ')}`,
   resultType: 'subsection',
 }));
 
@@ -121,14 +181,11 @@ export function Procedures({ selectedSubSectionId = null, onBackToOverview }: Pr
             className="inline-flex items-center gap-2 text-blue-700 dark:text-blue-300 hover:underline mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
-            Volver a protocolos PR
+            Volver a protocolos de protección radiológica
           </button>
 
           <div className="mb-6">
             <h2 className="text-gray-900 dark:text-white mb-2">{selectedProcedure.title}</h2>
-                  <p className="text-black dark:text-white">
-              Información detallada de la subsección seleccionada.
-            </p>
           </div>
 
           <div className="mb-6 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
@@ -140,11 +197,15 @@ export function Procedures({ selectedSubSectionId = null, onBackToOverview }: Pr
           </div>
 
           <div className="space-y-4">
-            {selectedProcedure.details.map((paragraph, index) => (
-                      <p key={index} className="text-black dark:text-white leading-relaxed">
-                {paragraph}
-              </p>
-            ))}
+            {selectedProcedure.details.map((detail, index) =>
+              detail.kind === 'list' ? (
+                <div key={index}>{detail.content}</div>
+              ) : (
+                <p key={index} className="text-black dark:text-white leading-relaxed">
+                  {detail.content}
+                </p>
+              )
+            )}
           </div>
         </div>
       </section>
@@ -156,12 +217,60 @@ export function Procedures({ selectedSubSectionId = null, onBackToOverview }: Pr
       <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-3">
-            <img src={protocolosIcono} alt="" className="w-16 h-16 object-contain flex-shrink-0" aria-hidden="true" />
-            <h2 className="text-gray-900 dark:text-white">Protocolos PR</h2>
+            <img
+              src={protocolosIcono}
+              alt=""
+              className="w-16 h-16 object-contain flex-shrink-0"
+              aria-hidden="true"
+            />
+            <h2 className="text-gray-900 dark:text-white">
+              Protocolos de Protección Radiológica
+            </h2>
           </div>
-                  <p className="text-black dark:text-white">
-            Selecciona una subsección para abrir su ventana con información completa.
-          </p>
+
+          <div className="space-y-4 text-black dark:text-white leading-relaxed">
+            <p>
+              El técnico debe conocer y aplicar el Reglamento de Protección Sanitaria contra Radiaciones Ionizantes, ya que el trabajo en una unidad de Medicina Nuclear implica riesgos derivados de la exposición a radiaciones ionizantes. Por ello, es fundamental disponer de protocolos de protección radiológica actualizados que garanticen la seguridad de las personas, el medio ambiente y las instalaciones.
+            </p>
+
+            <p>
+              Las medidas de protección radiológica buscan evitar los efectos deterministas, producidos al superar una dosis umbral, y reducir la probabilidad de efectos estocásticos, cuya aparición es aleatoria y aumenta con la dosis recibida. Estos últimos pueden provocar alteraciones genéticas en la persona expuesta y en su descendencia.
+            </p>
+
+            <p>
+              Todo sistema de protección radiológica se basa en tres principios fundamentales: justificación, optimización y limitación de dosis. Estos principios persiguen garantizar que la exposición a radiaciones ionizantes, tanto en pacientes como en profesionales, sea la mínima posible dentro de lo razonablemente alcanzable.
+            </p>
+
+            <p>
+              Una de las principales medidas de protección radiológica es la delimitación y señalización de áreas según el riesgo de irradiación y contaminación radiactiva, diferenciándose entre zonas vigiladas y zonas controladas conforme a la normativa vigente.
+            </p>
+
+            <ul className="list-disc pl-8 space-y-3 text-black dark:text-white leading-relaxed">
+              <li>
+                <strong>Zona vigilada:</strong> es aquella donde puede existir exposición a radiación superior a 1 mSv anual, aunque con baja probabilidad de alcanzar límites elevados. Suelen incluirse en esta categoría pasillos, despachos médicos, salas de control y aseos de pacientes inyectados.
+              </li>
+
+              <li>
+                <strong>Zona controlada:</strong> es aquella donde existe mayor riesgo de exposición radiológica, pudiendo superarse los 6 mSv anuales. En esta categoría se incluyen habitualmente las salas de exploración, inyección, pacientes inyectados y el cuarto caliente.
+              </li>
+            </ul>
+
+            <p>
+              La señalización de las zonas debe indicar los riesgos de irradiación y contaminación existentes. Además, el personal expuesto debe someterse a control dosimétrico y clasificarse como categoría A o B. Los técnicos que trabajan en zonas controladas pertenecen normalmente a la categoría A y deben utilizar dosímetros individuales.
+            </p>
+
+            <p>
+              Para reducir la exposición a las radiaciones se aplican medidas como disminuir el tiempo de exposición, aumentar la distancia respecto a la fuente radiactiva y utilizar blindajes adecuados. En Medicina Nuclear son habituales los protectores de jeringas de plomo o tungsteno, adaptados al tipo y energía del radioisótopo empleado.
+            </p>
+
+            <p>
+              El Real Decreto 1841/1997 establece las actividades máximas recomendadas para cada exploración y radiofármaco con el fin de evitar sobreexposiciones, aunque en la práctica clínica estas deben ajustarse a las características individuales de cada paciente.
+            </p>
+
+            <p>
+              Las mujeres embarazadas y en periodo de lactancia requieren medidas especiales de protección radiológica. Durante el embarazo, la dosis al feto no puede superar 1 mSv y, durante la lactancia, deben evitarse tareas con riesgo de incorporación de radionúclidos.
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

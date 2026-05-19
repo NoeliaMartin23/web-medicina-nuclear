@@ -122,7 +122,7 @@ const referenceFolders: ReferenceFolder[] = [
   },
   {
     id: 'protocolos-pm',
-    title: 'Protocolos de Puesta en Marcha',
+    title: 'Protocolos de Puesta en Marcha de los Equipos',
     description: 'Fuentes técnicas empleadas para control de calidad, verificación y puesta en marcha de gammacámara y PET.',
     references: [
       {
