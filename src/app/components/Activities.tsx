@@ -119,7 +119,7 @@ const activities: ActivityItem[] = [
       '',
     icon: <Zap className="w-5 h-5 text-blue-600" />,
     image:
-      'https://images.unsplash.com/photo-1563213126-a4273aed2016?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+      `${baseUrl}images/Generador1.jpg`,
     details: [
       paragraph(
         <>
@@ -180,7 +180,7 @@ const activities: ActivityItem[] = [
       '',
     icon: <Gauge className="w-5 h-5 text-blue-600" />,
     image:
-      'https://images.unsplash.com/photo-1582719471384-894fbb16e074?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+      `${baseUrl}images/Activimetro1.jpg`,
     details: [
       paragraph(
         'Un activímetro es un equipo importante en radiofarmacia que se utiliza para medir la actividad radiactiva de un radiofármaco antes de administrarlo a un paciente.'

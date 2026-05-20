@@ -1,6 +1,8 @@
 import type { SearchEntry } from '../searchTypes';
 import cierreIcono from '../../assets/cierre-icono.svg';
 
+const baseUrl = import.meta.env.BASE_URL;
+
 export const closureSearchEntries: SearchEntry[] = [
   {
     id: 'search-cierre',
@@ -76,7 +78,7 @@ export function Closure() {
 
               {/* Imagen */}
               <img
-                src={"public/images/Cierre.png"}
+                src={`${baseUrl}images/Cierre.png`}
                 alt="Cierre instalación"
                 className="w-55 rounded-2xl shadow-md object-cover"
               />
