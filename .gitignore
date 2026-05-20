@@ -28,3 +28,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+# Large media (keep out of git; use Git LFS or external hosting)
+public/images/*.mp4
