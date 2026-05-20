@@ -26,7 +26,13 @@ interface ActivityButtonProps {
 interface ActivityDetail {
   content: ReactNode;
   plainText: string;
-  kind?: 'paragraph' | 'list';
+  kind?: 'paragraph' | 'list' | 'image' | 'imageRow';
+  image?: string;
+  alt?: string;
+  images?: {
+    src: string;
+    alt: string;
+  }[];
 }
 
 const paragraph = (content: ReactNode, plainText?: string): ActivityDetail => ({
@@ -45,6 +51,26 @@ const bulletList = (items: ReactNode[], plainTextItems: string[]): ActivityDetai
   ),
   plainText: plainTextItems.join(' '),
   kind: 'list',
+});
+
+const singleImage = (image: string, alt: string): ActivityDetail => ({
+  content: null,
+  plainText: alt,
+  kind: 'image',
+  image,
+  alt,
+});
+
+const imageRow = (
+  images: {
+    src: string;
+    alt: string;
+  }[]
+): ActivityDetail => ({
+  content: null,
+  plainText: images.map((image) => image.alt).join(' '),
+  kind: 'imageRow',
+  images,
 });
 
 function ActivityButton({ item, onOpen }: ActivityButtonProps) {
@@ -71,10 +97,12 @@ function ActivityButton({ item, onOpen }: ActivityButtonProps) {
         />
       </div>
       <div className="p-6">
-        <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mb-4">
-          {item.icon}
+        <div className="flex items-center gap-4 mb-3">
+          <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center shrink-0">
+            {item.icon}
+          </div>
+          <h3 className="text-gray-900 dark:text-white text-xl">{item.title}</h3>
         </div>
-        <h3 className="text-gray-900 dark:text-white text-xl mb-3">{item.title}</h3>
                     <p className="text-black dark:text-white text-sm leading-relaxed">{item.summary}</p>
       </div>
     </div>
@@ -86,7 +114,7 @@ const activities: ActivityItem[] = [
     id: 'actividades-generador',
     title: 'Generador',
     summary:
-      'Controles de calidad del generador de 99Mo/99mTc para garantizar la pureza, seguridad y rendimiento del eluido.',
+      '',
     icon: <Zap className="w-5 h-5 text-blue-600" />,
     image:
       'https://images.unsplash.com/photo-1563213126-a4273aed2016?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
@@ -136,6 +164,10 @@ const activities: ActivityItem[] = [
       paragraph(
         'La realización periódica de estos controles garantiza la obtención de radiofármacos seguros, eficaces y adecuados para su utilización clínica, contribuyendo a mantener la calidad diagnóstica y la seguridad radiológica en la unidad de Medicina Nuclear.'
       ),
+      singleImage(
+        '/images/Generador1.jpg',
+        'Generador de radiofármacos'
+      ),
     ],
   },
 
@@ -143,7 +175,7 @@ const activities: ActivityItem[] = [
     id: 'actividades-activimetro',
     title: 'Activímetro',
     summary:
-      'Controles de calidad del activímetro para asegurar medidas trazables, precisas y reproducibles de actividad radiactiva.',
+      '',
     icon: <Gauge className="w-5 h-5 text-blue-600" />,
     image:
       'https://images.unsplash.com/photo-1582719471384-894fbb16e074?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
@@ -186,6 +218,16 @@ const activities: ActivityItem[] = [
           'Prueba de geometría: evalúa la influencia del volumen y el recipiente en la medida realizada.',
         ]
       ),
+      imageRow([
+        {
+          src: '/images/Activimetro1.jpg',
+          alt: 'Activímetro 1',
+        },
+        {
+          src: '/images/Activimetro2.jpg',
+          alt: 'Activímetro 2',
+        },
+      ]),
     ],
   },
 ];
@@ -241,15 +283,54 @@ export function Activities({ selectedSubSectionId = null, onBackToOverview }: Ac
           </div>
 
           <div className="space-y-4">
-            {selectedActivity.details.map((detail, index) =>
-              detail.kind === 'list' ? (
-                <div key={index}>{detail.content}</div>
-              ) : (
+            {selectedActivity.details.map((detail, index) => {
+              if (detail.kind === 'list') {
+                return <div key={index}>{detail.content}</div>;
+              }
+
+              if (detail.kind === 'image') {
+                return (
+                  <div
+                    key={index}
+                    className="mt-6 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700"
+                  >
+                    <ImageWithFallback
+                      src={detail.image ?? ''}
+                      alt={detail.alt ?? detail.plainText}
+                      className="w-full h-[450px] object-contain block"
+                    />
+                  </div>
+                );
+              }
+
+              if (detail.kind === 'imageRow') {
+                return (
+                  <div
+                    key={index}
+                    className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6"
+                  >
+                    {detail.images?.map((image, imageIndex) => (
+                      <div
+                        key={imageIndex}
+                        className="rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700"
+                      >
+                        <ImageWithFallback
+                          src={image.src}
+                          alt={image.alt}
+                          className="w-full h-[420px] object-contain block"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                );
+              }
+
+              return (
                 <p key={index} className="text-black dark:text-white leading-relaxed">
                   {detail.content}
                 </p>
-              )
-            )}
+              );
+            })}
           </div>
         </div>
       </section>

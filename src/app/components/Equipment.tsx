@@ -1,6 +1,7 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { Scan, Monitor, Activity, ArrowLeft } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import equipamientoIcono from '../../assets/equipamiento-icono.svg';
 
 const baseUrl = import.meta.env.BASE_URL;
 
@@ -16,7 +17,9 @@ interface EquipmentItem {
 interface EquipmentDetail {
   content: ReactNode;
   plainText: string;
-  kind?: 'paragraph' | 'title';
+  kind?: 'paragraph' | 'title' | 'image';
+  image?: string;
+  alt?: string;
 }
 
 interface EquipmentProps {
@@ -35,17 +38,26 @@ const paragraph = (content: ReactNode, plainText?: string): EquipmentDetail => (
   kind: 'paragraph',
 });
 
-const title = (content: string): EquipmentDetail => ({
+const title = (content: string, image?: string): EquipmentDetail => ({
   content,
   plainText: content,
   kind: 'title',
+  image,
+});
+
+const detailImage = (image: string, alt: string): EquipmentDetail => ({
+  content: null,
+  plainText: alt,
+  kind: 'image',
+  image,
+  alt,
 });
 
 const acquisitionEquipment: EquipmentItem[] = [
   {
     id: 'equipamiento-sanitario',
     title: 'Sanitario',
-    summary: 'Equipos asistenciales del área diagnóstica y terapéutica que sostienen la atención clínica segura.',
+    summary: '',
     icon: <Scan className="w-5 h-5 text-blue-600" />,
     image: `${baseUrl}images/imagen_material_fungible.png`,
     details: [
@@ -55,18 +67,9 @@ const acquisitionEquipment: EquipmentItem[] = [
           de los sistemas estructurales destinados a minimizar el riesgo de contaminación radiactiva tras la administración
           de radiofármacos. Estas áreas se consideran espacios controlados (áreas &quot;calientes&quot;), especialmente en
           procedimientos terapéuticos con radionúclidos de vida media significativa, y deben diseñarse conforme al principio
-          ALARA, garantizando la seguridad radiológica, la higiene estricta y la facilidad de descontaminación. (
-          <a
-            href="https://www.csn.es/proteccion-radiologica/trabajadores/red-alara"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 dark:text-blue-400 hover:underline"
-          >
-            https://www.csn.es/proteccion-radiologica/trabajadores/red-alara
-          </a>{' '}
-          + libro)
+          ALARA, garantizando la seguridad radiológica, la higiene estricta y la facilidad de descontaminación.
         </>,
-        'El equipamiento sanitario en un servicio de Medicina Nuclear comprende la infraestructura física y de los sistemas estructurales destinados a minimizar el riesgo de contaminación radiactiva tras la administración de radiofármacos. Estas áreas se consideran espacios controlados (áreas "calientes"), especialmente en procedimientos terapéuticos con radionúclidos de vida media significativa, y deben diseñarse conforme al principio ALARA, garantizando la seguridad radiológica, la higiene estricta y la facilidad de descontaminación. (https://www.csn.es/proteccion-radiologica/trabajadores/red-alara + libro)'
+        'El equipamiento sanitario en un servicio de Medicina Nuclear comprende la infraestructura física y de los sistemas estructurales destinados a minimizar el riesgo de contaminación radiactiva tras la administración de radiofármacos. Estas áreas se consideran espacios controlados (áreas "calientes"), especialmente en procedimientos terapéuticos con radionúclidos de vida media significativa, y deben diseñarse conforme al principio ALARA, garantizando la seguridad radiológica, la higiene estricta y la facilidad de descontaminación.'
       ),
       paragraph(
         <>
@@ -121,19 +124,10 @@ const acquisitionEquipment: EquipmentItem[] = [
         <>
           En cuanto a la protección estructural, puede requerirse <strong>blindaje plomado o de hormigón</strong> en paredes,
           suelos o zonas adyacentes, dependiendo del estudio radiológico previo y del tipo de radionúclido empleado,
-          especialmente en terapias con Iodo-131. En determinadas situaciones, el propio sistema de evacuación o el tanque del
-          inodoro pueden disponer de blindaje adicional para reducir la exposición radiológica. (
-          <a
-            href="https://www.csn.es/proteccion-radiologica"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 dark:text-blue-400 hover:underline"
-          >
-            https://www.csn.es/proteccion-radiologica
-          </a>{' '}
-          + libro)
+          especialmente en terapias con yodo-131. En determinadas situaciones, el propio sistema de evacuación o el tanque del
+          inodoro pueden disponer de blindaje adicional para reducir la exposición radiológica.
         </>,
-        'En cuanto a la protección estructural, puede requerirse blindaje plomado o de hormigón en paredes, suelos o zonas adyacentes, dependiendo del estudio radiológico previo y del tipo de radionúclido empleado, especialmente en terapias con Iodo-131. En determinadas situaciones, el propio sistema de evacuación o el tanque del inodoro pueden disponer de blindaje adicional para reducir la exposición radiológica. (https://www.csn.es/proteccion-radiologica + libro)'
+        'En cuanto a la protección estructural, puede requerirse blindaje plomado o de hormigón en paredes, suelos o zonas adyacentes, dependiendo del estudio radiológico previo y del tipo de radionúclido empleado, especialmente en terapias con yodo-131. En determinadas situaciones, el propio sistema de evacuación o el tanque del inodoro pueden disponer de blindaje adicional para reducir la exposición radiológica.'
       ),
       paragraph('Estas medidas de protección deben ajustarse a los criterios de seguridad radiológica establecidos por el Consejo de Seguridad Nuclear y a la normativa vigente sobre instalaciones radiactivas.'),
       title('3. Gestión de Contaminación y Seguridad'),
@@ -151,27 +145,9 @@ const acquisitionEquipment: EquipmentItem[] = [
           El <strong>sistema de ventilación</strong> debe ser forzado e independiente, garantizando una adecuada renovación del
           aire y evitando la acumulación de posibles gases radiactivos en el interior del sanitario. Los equipos portátiles de
           monitorización de contaminación pueden encontrarse en las proximidades para la verificación radiológica cuando sea
-          necesario, siguiendo las recomendaciones generales de control radiológico ambiental. (
-          <a
-            href="https://www.miteco.gob.es/es.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 dark:text-blue-400 hover:underline"
-          >
-            https://www.miteco.gob.es/es.html
-          </a>
-          ) (
-          <a
-            href="https://www.csn.es/proteccion-radiologica"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 dark:text-blue-400 hover:underline"
-          >
-            https://www.csn.es/proteccion-radiologica
-          </a>{' '}
-          + libro)
+          necesario, siguiendo las recomendaciones generales de control radiológico ambiental.
         </>,
-        'El sistema de ventilación debe ser forzado e independiente, garantizando una adecuada renovación del aire y evitando la acumulación de posibles gases radiactivos en el interior del sanitario. Los equipos portátiles de monitorización de contaminación pueden encontrarse en las proximidades para la verificación radiológica cuando sea necesario, siguiendo las recomendaciones generales de control radiológico ambiental. (https://www.miteco.gob.es/es.html) (https://www.csn.es/proteccion-radiologica + libro)'
+        'El sistema de ventilación debe ser forzado e independiente, garantizando una adecuada renovación del aire y evitando la acumulación de posibles gases radiactivos en el interior del sanitario. Los equipos portátiles de monitorización de contaminación pueden encontrarse en las proximidades para la verificación radiológica cuando sea necesario, siguiendo las recomendaciones generales de control radiológico ambiental.'
       ),
       title('4. Sistema de Desecho (Tanques de Decaimiento)'),
       paragraph(
@@ -183,13 +159,17 @@ const acquisitionEquipment: EquipmentItem[] = [
         </>,
         'En procedimientos terapéuticos, especialmente con radioyodo (I-131), el sistema de evacuación puede conectarse a tanques de decaimiento radiactivo. Estos depósitos permiten almacenar temporalmente los residuos líquidos hasta que la actividad disminuya a niveles permitidos por la normativa vigente antes de su vertido al alcantarillado general.'
       ),
-      paragraph('En algunos casos, puede contemplarse la conducción diferenciada de efluentes según el protocolo del centro y las recomendaciones de seguridad aplicables a instalaciones de Medicina Nuclear.')
+      paragraph('En algunos casos, puede contemplarse la conducción diferenciada de efluentes según el protocolo del centro y las recomendaciones de seguridad aplicables a instalaciones de Medicina Nuclear.'),
+      detailImage(
+        `${baseUrl}images/Sanitario1.png`,
+        'Equipamiento sanitario y de protección radiológica'
+      )
     ]
   },
   {
     id: 'equipamiento-electromedico',
     title: 'Electromédico',
-    summary: 'Sistemas diagnósticos de alta complejidad cuya precisión depende de calibraciones y control técnico continuo.',
+    summary: '',
     icon: <Monitor className="w-5 h-5 text-blue-600" />,
     image: `${baseUrl}images/FotoPortadaElectromedico.jpg`,
     details: [
@@ -201,20 +181,13 @@ const acquisitionEquipment: EquipmentItem[] = [
       ),
       paragraph(
         <>
-          La organización de este equipamiento se divide principalmente en áreas de <strong>imagenología, radiofarmacia o “cámara caliente” y protección radiológica</strong>. Asimismo, la infraestructura debe contar con salas de espera diferenciadas para pacientes inyectados (“calientes”) y no inyectados (“fríos”), así como &quot;hot toilets&quot; (baños blindados) para pacientes tratados con radionúclidos, garantizando la correcta separación de circuitos asistenciales (
-          <a
-            href="https://www.ncbi.nlm.nih.gov/books/NBK597384/"
-            target="_blank"
-            rel="noreferrer"
-            className="text-blue-600 underline dark:text-blue-400"
-          >
-            https://www.ncbi.nlm.nih.gov/books/NBK597384/
-          </a>
-          )
+          La organización de este equipamiento se divide principalmente en áreas de <strong>imagenología, radiofarmacia o “cámara caliente” y protección radiológica</strong>. Asimismo, la infraestructura debe contar con salas de espera diferenciadas para pacientes inyectados (“calientes”) y no inyectados (“fríos”), así como &quot;hot toilets&quot; (baños blindados) para pacientes tratados con radionúclidos, garantizando la correcta separación de circuitos asistenciales.
         </>,
-        'La organización de este equipamiento se divide principalmente en áreas de imagenología, radiofarmacia o “cámara caliente” y protección radiológica. Asimismo, la infraestructura debe contar con salas de espera diferenciadas para pacientes inyectados (“calientes”) y no inyectados (“fríos”), así como "hot toilets" (baños blindados) para pacientes tratados con radionúclidos, garantizando la correcta separación de circuitos asistenciales (https://www.ncbi.nlm.nih.gov/books/NBK597384/).'
+        'La organización de este equipamiento se divide principalmente en áreas de imagenología, radiofarmacia o “cámara caliente” y protección radiológica. Asimismo, la infraestructura debe contar con salas de espera diferenciadas para pacientes inyectados (“calientes”) y no inyectados (“fríos”), así como "hot toilets" (baños blindados) para pacientes tratados con radionúclidos, garantizando la correcta separación de circuitos asistenciales.'
       ),
-      title('1. Equipamiento Principal de Imagenología (Sala de Exploración)'),
+      title(
+        '1. Equipamiento Principal de Imagenología (Sala de Exploración)'
+      ),
       paragraph(
         <>
           El equipo fundamental en Medicina Nuclear es la <strong>gammacámara convencional o Anger Camera</strong>, capaz de detectar la radiación gamma emitida por el radiofármaco administrado al paciente. Este sistema está compuesto por <u>colimadores, cristales centelleadores y tubos fotomultiplicadores</u>, elementos esenciales para dirigir la radiación y transformar la señal detectada en imágenes diagnósticas de calidad.
@@ -223,18 +196,9 @@ const acquisitionEquipment: EquipmentItem[] = [
       ),
       paragraph(
         <>
-          Los sistemas <strong>SPECT</strong> (Tomografía Computarizada por Emisión de Fotón Único) presentan una evolución de la gammacámara convencional, permitiendo la adquisición de imágenes tridimensionales mediante rotación alrededor del paciente y reconstrucción tomográfica. Por otro lado, los equipos <strong>PET/TC</strong> combinan la tomografía por emisión de positrones con tomografía computarizada, integrando información funcional y anatómica en una única exploración. (
-          <a
-            href="https://www.gammascan.es/tecnologia-y-equipos-en-medicina-nuclear/"
-            target="_blank"
-            rel="noreferrer"
-            className="text-blue-600 underline dark:text-blue-400"
-          >
-            https://www.gammascan.es/tecnologia-y-equipos-en-medicina-nuclear/
-          </a>
-          )
+          Los sistemas <strong>SPECT</strong> (Tomografía Computarizada por Emisión de Fotón Único) presentan una evolución de la gammacámara convencional, permitiendo la adquisición de imágenes tridimensionales mediante rotación alrededor del paciente y reconstrucción tomográfica. Por otro lado, los equipos <strong>PET/TC</strong> combinan la tomografía por emisión de positrones con tomografía computarizada, integrando información funcional y anatómica en una única exploración.
         </>,
-        'Los sistemas SPECT (Tomografía Computarizada por Emisión de Fotón Único) presentan una evolución de la gammacámara convencional, permitiendo la adquisición de imágenes tridimensionales mediante rotación alrededor del paciente y reconstrucción tomográfica. Por otro lado, los equipos PET/TC combinan la tomografía por emisión de positrones con tomografía computarizada, integrando información funcional y anatómica en una única exploración. (https://www.gammascan.es/tecnologia-y-equipos-en-medicina-nuclear/).'
+        'Los sistemas SPECT (Tomografía Computarizada por Emisión de Fotón Único) presentan una evolución de la gammacámara convencional, permitiendo la adquisición de imágenes tridimensionales mediante rotación alrededor del paciente y reconstrucción tomográfica. Por otro lado, los equipos PET/TC combinan la tomografía por emisión de positrones con tomografía computarizada, integrando información funcional y anatómica en una única exploración.'
       ),
       paragraph(
         <>
@@ -247,6 +211,10 @@ const acquisitionEquipment: EquipmentItem[] = [
           En <strong>estudios cardiológicos</strong> sincronizados (gated), se emplean <strong>electrocardiógrafos</strong> que registran la actividad eléctrica cardíaca y permiten sincronizar la adquisición de imágenes con el ciclo cardíaco. Asimismo, para estudios pulmonares de ventilación se utilizan sistemas específicos como <strong>Technegas</strong>, capaces de generar aerosoles radiactivos inhalables para la evaluación funcional respiratoria.
         </>,
         'En estudios cardiológicos sincronizados (gated), se emplean electrocardiógrafos que registran la actividad eléctrica cardíaca y permiten sincronizar la adquisición de imágenes con el ciclo cardíaco. Asimismo, para estudios pulmonares de ventilación se utilizan sistemas específicos como Technegas, capaces de generar aerosoles radiactivos inhalables para la evaluación funcional respiratoria.'
+      ),
+      detailImage(
+        `${baseUrl}images/Electromedico1.jpg`,
+        'Equipamiento principal de imagenología'
       ),
       title('2. Equipamiento de Radiofarmacia y Laboratorio ("Cámara Caliente")'),
       paragraph(
@@ -292,7 +260,9 @@ const acquisitionEquipment: EquipmentItem[] = [
         </>,
         'En las proximidades de áreas controladas pueden encontrarse además equipos portátiles de medición y detectores de superficie para verificar posibles contaminaciones radiológicas.'
       ),
-      title('4. Equipamiento de Apoyo y Paciente'),
+      title(
+        '4. Equipamiento de Apoyo y Paciente'
+      ),
       paragraph(
         <>
           El servicio debe disponer de <strong>camillas de traslado y sillones de tratamiento</strong>, frecuentemente ajustables eléctricamente para mejorar la comodidad y estabilidad del paciente durante la exploración. Asimismo, en estudios de esfuerzo o exploraciones cardiológicas se emplean monitores de signos vitales para controlar constantes fisiológicas durante el procedimiento.
@@ -313,13 +283,17 @@ const acquisitionEquipment: EquipmentItem[] = [
       ),
       paragraph(
         'De acuerdo con los criterios de dotación de medios materiales establecidos por servicios públicos de salud autonómicos, un servicio de Medicina Nuclear debe disponer de equipamiento mínimo que garantice la adquisición diagnóstica, la manipulación segura de radiofármacos y el cumplimiento de la normativa de protección radiológica. Dichos requisitos incluyen, al menos, una gammacámara o sistema PET, activímetro calibrado, cabina blindada de preparación, sistemas de almacenamiento seguro y dispositivos de control de contaminación.'
-      )
+      ),
+      detailImage(
+        `${baseUrl}images/Electromedico2.jpg`,
+        'Equipamiento de apoyo y paciente'
+      ),
     ]
   },
   {
     id: 'equipamiento-informatico',
     title: 'Informático',
-    summary: 'Infraestructura digital que permite adquisición, procesamiento, almacenamiento y trazabilidad de estudios.',
+    summary: '',
     icon: <Activity className="w-5 h-5 text-blue-600" />,
     image: `${baseUrl}images/FotoPortadaInformatico.jpg`,
     details: [
@@ -387,18 +361,9 @@ const acquisitionEquipment: EquipmentItem[] = [
       paragraph(
         'Este conjunto de recursos tecnológicos permite la correcta realización, reconstrucción y análisis de tomografías computarizadas por emisión de fotón único (SPECT) y tomografía por emisión de positrones (PET), constituyendo una parte esencial del funcionamiento de un servicio moderno de Medicina Nuclear.'
       ),
-      paragraph(
-        <>
-          <a
-            href="https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hrs3/index.php?id=medicina_nuclear_equipamiento"
-            target="_blank"
-            rel="noreferrer"
-            className="text-blue-600 underline dark:text-blue-400"
-          >
-            https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hrs3/index.php?id=medicina_nuclear_equipamiento
-          </a>
-        </>,
-        'https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hrs3/index.php?id=medicina_nuclear_equipamiento'
+      detailImage(
+        `${baseUrl}images/Informatico1.jpg`,
+        'Equipamiento informático y de visualización'
       )
     ]
   }
@@ -429,10 +394,12 @@ function EquipmentButton({ item, onOpen }: EquipmentButtonProps) {
         />
       </div>
       <div className="p-6">
-        <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mb-4">
-          {item.icon}
+        <div className="flex items-center gap-4 mb-3">
+          <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center shrink-0">
+            {item.icon}
+          </div>
+          <h3 className="text-gray-900 dark:text-white text-xl">{item.title}</h3>
         </div>
-        <h3 className="text-gray-900 dark:text-white text-xl mb-3">{item.title}</h3>
                     <p className="text-black dark:text-white text-sm leading-relaxed">{item.summary}</p>
       </div>
     </button>
@@ -480,18 +447,35 @@ export function Equipment({ selectedSubSectionId = null, onBackToOverview }: Equ
           </div>
 
           <div className="space-y-4">
-            {selectedEquipment.details.map((detail, index) => (
-              <p
-                key={index}
-                className={
-                  detail.kind === 'title'
-                          ? 'pl-3 font-bold text-black dark:text-white leading-relaxed'
-                          : 'text-black dark:text-white leading-relaxed'
-                }
-              >
-                {detail.content}
-              </p>
-            ))}
+            {selectedEquipment.details.map((detail, index) => {
+              if (detail.kind === 'image') {
+                return (
+                  <div
+                    key={index}
+                    className="mt-4 mb-8 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700"
+                  >
+                    <ImageWithFallback
+                      src={detail.image ?? ''}
+                      alt={detail.alt ?? detail.plainText}
+                      className="w-full max-h-[360px] object-contain"
+                    />
+                  </div>
+                );
+              }
+
+              return (
+                <p
+                  key={index}
+                  className={
+                    detail.kind === 'title'
+                      ? 'pl-3 font-bold text-black dark:text-white leading-relaxed'
+                      : 'text-black dark:text-white leading-relaxed'
+                  }
+                >
+                  {detail.content}
+                </p>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -502,16 +486,24 @@ export function Equipment({ selectedSubSectionId = null, onBackToOverview }: Equ
     <section className="py-16 px-6">
       <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
         <div className="mb-12">
-          <h2 className="text-gray-900 dark:text-white mb-3">Equipamiento</h2>
+          <div className="flex items-center gap-3 mb-3">
+            <img
+              src={equipamientoIcono}
+              alt=""
+              aria-hidden="true"
+              className="w-16 h-16 object-contain shrink-0"
+            />
+            <h2 className="text-gray-900 dark:text-white">Equipamiento</h2>
+          </div>
           <div className="space-y-5">
             <p className="text-black dark:text-white leading-relaxed">
-              El <strong>equipamiento</strong> de una sala de medicina nuclear combina equipos de imagen funcional de alta tecnología, como gammacámaras (SPECT) y tomógrafos (PET/TC), con elementos de radioprotección estricta para facilitar la ejecución de las técnicas por parte del técnico y facilitar el desarrollo de sus funciones. Este equipamiento debe optimizar las exposiciones a radiaciones ionizantes del personal médico y pacientes, además de hacer la estancia de los pacientes en la unidad lo más agradable posible. Además, incluye activímetros para medir radiofármacos, inyectores, blindajes plomados, sistemas de ventilación y software de reconstrucción. (https://www.csn.es/proteccion-radiologica/trabajadores + libro)
+              El <strong>equipamiento</strong> de una sala de medicina nuclear combina equipos de imagen funcional de alta tecnología, como gammacámaras (SPECT) y tomógrafos (PET/TC), con elementos de radioprotección estricta para facilitar la ejecución de las técnicas por parte del técnico y favorecer el desarrollo seguro de sus funciones. Este equipamiento debe optimizar las exposiciones a radiaciones ionizantes del personal y de los pacientes, además de hacer la estancia de los pacientes en la unidad lo más segura y confortable posible. Además, incluye activímetros para medir radiofármacos, inyectores, blindajes plomados, sistemas de ventilación y software de reconstrucción.
             </p>
             <p className="text-black dark:text-white leading-relaxed">
-              La infraestructura debe contar con pavimentos especiales, sistemas de monitorización ambiental de radiación y accesos directos para pacientes, asegurando que las zonas adyacentes no reciben radiación innecesaria. (https://www.csn.es/proteccion-radiologica/vigilancia-radiologica-ambiental)
+              La infraestructura debe contar con pavimentos especiales, sistemas de monitorización ambiental de radiación y accesos directos para pacientes, asegurando que las zonas adyacentes no reciban radiación innecesaria.
             </p>
             <p className="text-black dark:text-white leading-relaxed">
-              Dicho equipamiento se organiza en tres categorías principales: <u>equipamiento sanitario</u>, <u>equipamiento electromédico</u> y <u>equipamiento informático</u>, cada una con funciones específicas e interrelacionadas dentro del circuito asistencial. (https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hrs3/index.php?id=medicina_nuclear_equipamiento)
+              Dicho equipamiento se organiza en tres categorías principales: <u>equipamiento sanitario</u>, <u>equipamiento electromédico</u> y <u>equipamiento informático</u>, cada una con funciones específicas e interrelacionadas dentro del circuito asistencial.
             </p>
           </div>
         </div>

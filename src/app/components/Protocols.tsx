@@ -16,7 +16,14 @@ interface ProtocolItem {
 interface ProtocolDetail {
   content: ReactNode;
   plainText: string;
-  kind?: 'paragraph' | 'list';
+  kind?: 'paragraph' | 'list' | 'image' | 'video' | 'imageRow';
+  image?: string;
+  alt?: string;
+  video?: string;
+  images?: {
+    src: string;
+    alt: string;
+  }[];
 }
 
 interface ProtocolsProps {
@@ -47,6 +54,33 @@ const bulletList = (items: ReactNode[], plainTextItems: string[]): ProtocolDetai
   kind: 'list',
 });
 
+const singleImage = (image: string, alt: string): ProtocolDetail => ({
+  content: null,
+  plainText: alt,
+  kind: 'image',
+  image,
+  alt,
+});
+
+const videoDetail = (video: string, plainText: string): ProtocolDetail => ({
+  content: null,
+  plainText,
+  kind: 'video',
+  video,
+});
+
+const imageRow = (
+  images: {
+    src: string;
+    alt: string;
+  }[]
+): ProtocolDetail => ({
+  content: null,
+  plainText: images.map((image) => image.alt).join(' '),
+  kind: 'imageRow',
+  images,
+});
+
 function ProtocolButton({ item, onOpen }: ProtocolButtonProps) {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -71,10 +105,12 @@ function ProtocolButton({ item, onOpen }: ProtocolButtonProps) {
         />
       </div>
       <div className="p-6">
-        <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mb-4">
-          {item.icon}
+        <div className="flex items-center gap-4 mb-3">
+          <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center shrink-0">
+            {item.icon}
+          </div>
+          <h3 className="text-gray-900 dark:text-white text-xl">{item.title}</h3>
         </div>
-        <h3 className="text-gray-900 dark:text-white text-xl mb-3">{item.title}</h3>
                     <p className="text-black dark:text-white text-sm leading-relaxed">{item.summary}</p>
       </div>
     </div>
@@ -85,10 +121,9 @@ const protocolItems: ProtocolItem[] = [
   {
     id: 'protocolos-gammacamara',
     title: 'Gammacámara',
-    summary: 'Protocolos de control y verificación para asegurar calidad de imagen y funcionamiento estable del sistema.',
+    summary: '',
     icon: <Scan className="w-5 h-5 text-blue-600" />,
-    image:
-      'https://images.unsplash.com/photo-1581595219315-a187dd40c322?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    image: '/images/PortadaGammacamara.jpg',
     details: [
       paragraph(
         'Los fabricantes de las gammacámaras establecen un programa de controles de calidad con diferentes periodicidades en función del parámetro evaluado. Las pruebas de carácter diario deben realizarse antes del inicio de la actividad clínica, con el fin de garantizar el correcto funcionamiento del equipo y asegurar la calidad diagnóstica de las imágenes obtenidas.'
@@ -138,9 +173,9 @@ const protocolItems: ProtocolItem[] = [
       ),
       paragraph(
         <>
-          Es una <strong>calibración o control de uniformidad de la gammacámara</strong>. Sirve para comprobar que los detectores captan la radiación de forma <strong>homogénea y correcta</strong> en toda su superficie.
+          <strong>Calibración o control de uniformidad de la gammacámara:</strong> Sirve para comprobar que los detectores captan la radiación de forma <strong>homogénea y correcta</strong> en toda su superficie.
         </>,
-        'Es una calibración o control de uniformidad de la gammacámara. Sirve para comprobar que los detectores captan la radiación de forma homogénea y correcta en toda su superficie.'
+        'Calibración o control de uniformidad de la gammacámara: Sirve para comprobar que los detectores captan la radiación de forma homogénea y correcta en toda su superficie.'
       ),
       paragraph(
         <>
@@ -154,15 +189,47 @@ const protocolItems: ProtocolItem[] = [
         </>,
         'En resumen, esta prueba garantiza que la gammacámara funciona correctamente y que las imágenes obtenidas en los pacientes serán fiables, precisas y útiles para el diagnóstico.'
       ),
+      videoDetail(
+        '/images/VideoGamma1.mp4',
+        'Vídeo de control de uniformidad de la gammacámara'
+      ),
+      imageRow([
+        {
+          src: '/images/Gamma1.jpg',
+          alt: 'Control de gammacámara 1',
+        },
+        {
+          src: '/images/Gamma2.jpg',
+          alt: 'Control de gammacámara 2',
+        },
+        {
+          src: '/images/Gamma3.jpg',
+          alt: 'Control de gammacámara 3',
+        },
+      ]),
+      paragraph('Cambio de colimadores:'),
+      videoDetail(
+        '/images/VideoGamma2.mp4',
+        'Vídeo de control de uniformidad de la gammacámara'
+      ),
+      imageRow([
+        {
+          src: '/images/Gamma4.jpg',
+          alt: 'Control de gammacámara 1',
+        },
+        {
+          src: '/images/Gamma5.jpg',
+          alt: 'Control de gammacámara 2',
+        },
+      ]),
     ]
   },
   {
     id: 'protocolos-pet',
     title: 'PET',
-    summary: 'Procedimientos de puesta en marcha y control de calidad para mantener precisión diagnóstica y cuantificación confiable.',
+    summary: '',
     icon: <Activity className="w-5 h-5 text-blue-600" />,
-    image:
-      'https://images.unsplash.com/photo-1659353887988-7f64f5f9d8f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    image: '/images/PortadaPet.jpg',
     details: [
       paragraph(
         <>
@@ -208,6 +275,10 @@ const protocolItems: ProtocolItem[] = [
           'Sensibilidad: determina la tasa de eventos detectados por unidad de actividad de la fuente radiactiva. Depende tanto de la eficiencia geométrica, relacionada con la fracción de fotones que alcanzan el detector, como de la eficiencia intrínseca, asociada a la capacidad del detector para registrar dichos fotones. Este control se efectúa mensualmente y la diferencia respecto al valor de referencia debe ser inferior al 10 %.',
           'Uniformidad tomográfica: se realiza mensualmente mediante un maniquí tomográfico rellenable con 18F. El objetivo es comprobar la uniformidad de la imagen obtenida y verificar la ausencia de artefactos o irregularidades visibles.',
         ]
+      ),
+      singleImage(
+        '/images/Pet1.jpg',
+        'Uniformidad tomográfica PET'
       ),
     ]
   }
@@ -264,15 +335,71 @@ export function Protocols({ selectedSubSectionId = null, onBackToOverview }: Pro
           </div>
 
           <div className="space-y-4">
-            {selectedProtocol.details.map((detail, index) => (
-              detail.kind === 'list' ? (
-                <div key={index}>{detail.content}</div>
-              ) : (
+            {selectedProtocol.details.map((detail, index) => {
+              if (detail.kind === 'list') {
+                return <div key={index}>{detail.content}</div>;
+              }
+
+              if (detail.kind === 'image') {
+                return (
+                  <div
+                    key={index}
+                    className="mt-6 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700"
+                  >
+                    <ImageWithFallback
+                      src={detail.image ?? ''}
+                      alt={detail.alt ?? detail.plainText}
+                      className="w-full h-[450px] object-contain block"
+                    />
+                  </div>
+                );
+              }
+
+              if (detail.kind === 'video') {
+                return (
+                  <div
+                    key={index}
+                    className="mt-6 rounded-xl overflow-hidden bg-black border border-gray-200 dark:border-gray-700"
+                  >
+                    <video
+                      src={detail.video}
+                      controls
+                      className="w-full max-h-[500px] block"
+                    >
+                      Tu navegador no soporta la reproducción de vídeo.
+                    </video>
+                  </div>
+                );
+              }
+
+              if (detail.kind === 'imageRow') {
+                return (
+                  <div
+                    key={index}
+                    className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6"
+                  >
+                    {detail.images?.map((image, imageIndex) => (
+                      <div
+                        key={imageIndex}
+                        className="rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700"
+                      >
+                        <ImageWithFallback
+                          src={image.src}
+                          alt={image.alt}
+                          className="w-full h-[360px] object-contain block"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                );
+              }
+
+              return (
                 <p key={index} className="text-black dark:text-white leading-relaxed">
                   {detail.content}
                 </p>
-              )
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

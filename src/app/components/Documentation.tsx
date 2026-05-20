@@ -102,10 +102,12 @@ function DocumentationButton({ item, onOpen }: DocumentationButtonProps) {
         />
       </div>
       <div className="p-6">
-        <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mb-4">
-          {item.icon}
+        <div className="flex items-center gap-4 mb-3">
+          <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center shrink-0">
+            {item.icon}
+          </div>
+          <h3 className="text-gray-900 dark:text-white text-xl">{item.title}</h3>
         </div>
-        <h3 className="text-gray-900 dark:text-white text-xl mb-3">{item.title}</h3>
                     <p className="text-black dark:text-white text-sm leading-relaxed">{item.summary}</p>
       </div>
     </div>
@@ -117,7 +119,7 @@ const documents: DocumentItem[] = [
     id: 'documentacion-averias',
     title: 'Registro de averías e incidencias',
     summary:
-      'Registro y trazabilidad de incidencias técnicas, averías y actuaciones correctivas realizadas en el servicio.',
+      '',
     icon: <AlertTriangle className="w-5 h-5 text-blue-600" />,
     image:
       'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
@@ -180,7 +182,7 @@ const documents: DocumentItem[] = [
     id: 'documentacion-archivo',
     title: 'Archivo e informes',
     summary:
-      'Conservación y organización de informes técnicos, controles de calidad y documentación radiológica.',
+      '',
 
     icon: <Archive className="w-5 h-5 text-blue-600" />,
 

@@ -19,36 +19,36 @@ const referenceFolders: ReferenceFolder[] = [
   {
     id: 'introduccion',
     title: 'Introducción',
-    description: 'Fuentes institucionales y marcos generales citados en la contextualización de la Medicina Nuclear.',
+    description: 'Solo se mantienen los enlaces que aparecían asociados a esta sección en la plataforma.',
     references: [
       {
         id: 'intro-1',
         citation:
-          'European Medicines Agency. European Medicines Agency [Internet]. [cited 2026 May 18]. Available from: https://www.ema.europa.eu/en/homepage',
+          'European Medicines Agency. European Medicines Agency [Internet]. Amsterdam: EMA; [cited 2026 May 19]. Available from: https://www.ema.europa.eu/en/homepage',
         url: 'https://www.ema.europa.eu/en/homepage',
       },
       {
         id: 'intro-2',
         citation:
-          'Consejo de Seguridad Nuclear. Consejo de Seguridad Nuclear [Internet]. [cited 2026 May 18]. Available from: https://www.csn.es/home',
+          'Consejo de Seguridad Nuclear. Consejo de Seguridad Nuclear [Internet]. Madrid: CSN; [cited 2026 May 19]. Available from: https://www.csn.es/home',
         url: 'https://www.csn.es/home',
       },
       {
         id: 'intro-3',
         citation:
-          'International Atomic Energy Agency. International Atomic Energy Agency [Internet]. [cited 2026 May 18]. Available from: https://www.iaea.org/es',
+          'International Atomic Energy Agency. International Atomic Energy Agency [Internet]. Vienna: IAEA; [cited 2026 May 19]. Available from: https://www.iaea.org/es',
         url: 'https://www.iaea.org/es',
       },
       {
         id: 'intro-4',
         citation:
-          'European Association of Nuclear Medicine. Guidelines overview [Internet]. [cited 2026 May 18]. Available from: https://eanm.org/publications/guidelines/overview/',
-        url: 'https://eanm.org/publications/guidelines/overview/',
+          'European Association of Nuclear Medicine. European Association of Nuclear Medicine [Internet]. Vienna: EANM; [cited 2026 May 19]. Available from: https://www.eanm.org/',
+        url: 'https://www.eanm.org/',
       },
       {
         id: 'intro-5',
         citation:
-          'International Commission on Radiological Protection. ICRP [Internet]. [cited 2026 May 18]. Available from: https://www.icrp.org/',
+          'International Commission on Radiological Protection. ICRP [Internet]. Ottawa: ICRP; [cited 2026 May 19]. Available from: https://www.icrp.org/',
         url: 'https://www.icrp.org/',
       },
     ],
@@ -56,222 +56,125 @@ const referenceFolders: ReferenceFolder[] = [
   {
     id: 'equipamiento',
     title: 'Equipamiento',
-    description: 'Bibliografía y recursos utilizados para describir el equipamiento sanitario, electromédico e informático.',
+    description: 'Solo se mantienen los enlaces que aparecían asociados a esta sección en la plataforma.',
     references: [
       {
         id: 'equip-1',
         citation:
-          'Najam H, Dearborn MC, Tafti D. Nuclear Medicine Instrumentation. In: StatPearls [Internet]. Treasure Island (FL): StatPearls Publishing; 2026 Jan- [updated 2023 Nov 14; cited 2026 May 18]. Available from: https://www.ncbi.nlm.nih.gov/books/NBK597384/',
-        url: 'https://www.ncbi.nlm.nih.gov/books/NBK597384/',
+          'Consejo de Seguridad Nuclear. Red ALARA [Internet]. Madrid: CSN; [cited 2026 May 19]. Available from: https://www.csn.es/proteccion-radiologica/trabajadores/red-alara',
+        url: 'https://www.csn.es/proteccion-radiologica/trabajadores/red-alara',
       },
       {
         id: 'equip-2',
         citation:
-          'Consejo de Seguridad Nuclear. Red ALARA [Internet]. [cited 2026 May 18]. Available from: https://www.csn.es/proteccion-radiologica/trabajadores/red-alara',
-        url: 'https://www.csn.es/proteccion-radiologica/trabajadores/red-alara',
+          'Consejo de Seguridad Nuclear. Protección radiológica [Internet]. Madrid: CSN; [cited 2026 May 19]. Available from: https://www.csn.es/proteccion-radiologica',
+        url: 'https://www.csn.es/proteccion-radiologica',
       },
       {
         id: 'equip-3',
         citation:
-          'International Atomic Energy Agency. Equipment [Internet]. [cited 2026 May 18]. Available from: https://www.iaea.org/resources/hhc/medical-physics/nuclear-medicine/equipment',
-        url: 'https://www.iaea.org/resources/hhc/medical-physics/nuclear-medicine/equipment',
+          'Ministerio para la Transición Ecológica y el Reto Demográfico. Ministerio para la Transición Ecológica y el Reto Demográfico [Internet]. Madrid: MITECO; [cited 2026 May 19]. Available from: https://www.miteco.gob.es/es.html',
+        url: 'https://www.miteco.gob.es/es.html',
       },
       {
         id: 'equip-4',
         citation:
-          'Servicio Andaluz de Salud. UGC de Medicina Nuclear: equipamiento [Internet]. [cited 2026 May 18]. Available from: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hrs3/index.php?id=medicina_nuclear_equipamiento',
-        url: 'https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hrs3/index.php?id=medicina_nuclear_equipamiento',
+          'Najam H, Dearborn MC, Tafti D. Nuclear Medicine Instrumentation. In: StatPearls [Internet]. Treasure Island (FL): StatPearls Publishing; 2026 Jan- [updated 2023 Nov 14; cited 2026 May 19]. Available from: https://www.ncbi.nlm.nih.gov/books/NBK597384/',
+        url: 'https://www.ncbi.nlm.nih.gov/books/NBK597384/',
       },
       {
         id: 'equip-5',
         citation:
-          'Gammascan. Tecnología y equipos en medicina nuclear [Internet]. [cited 2026 May 18]. Available from: https://www.gammascan.es/tecnologia-y-equipos-en-medicina-nuclear/',
+          'Gammascan. Tecnología y equipos en medicina nuclear [Internet]. [place unknown]: Gammascan; [cited 2026 May 19]. Available from: https://www.gammascan.es/tecnologia-y-equipos-en-medicina-nuclear/',
         url: 'https://www.gammascan.es/tecnologia-y-equipos-en-medicina-nuclear/',
       },
       {
         id: 'equip-6',
         citation:
-          'Servicio Gallego de Salud. Medios humanos y materiales RF en MN y RD [Internet]. [cited 2026 May 18]. Available from: https://www.sergas.gal/Docs/PROCRAD/Medios%20humanos%20y%20materiales%20RF%20en%20MN%20y%20RD.pdf',
-        url: 'https://www.sergas.gal/Docs/PROCRAD/Medios%20humanos%20y%20materiales%20RF%20en%20MN%20y%20RD.pdf',
+          'Servicio Andaluz de Salud. UGC de Medicina Nuclear: equipamiento [Internet]. Sevilla: Servicio Andaluz de Salud; [cited 2026 May 19]. Available from: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hrs3/index.php?id=medicina_nuclear_equipamiento',
+        url: 'https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hrs3/index.php?id=medicina_nuclear_equipamiento',
+      },
+      {
+        id: 'equip-7',
+        citation:
+          'Consejo de Seguridad Nuclear. Protección radiológica del público y del medio ambiente [Internet]. Madrid: CSN; [cited 2026 May 19]. Available from: https://www.csn.es/proteccion-radiologica/vigilancia-radiologica-ambiental',
+        url: 'https://www.csn.es/proteccion-radiologica/vigilancia-radiologica-ambiental',
       },
     ],
   },
   {
     id: 'material',
     title: 'Material',
-    description: 'Referencias de apoyo para material fungible, no fungible y gestión de reposición.',
+    description: 'Solo se mantienen los enlaces que aparecían asociados a esta sección en la plataforma.',
     references: [
       {
         id: 'material-1',
         citation:
-          'Consejo de Seguridad Nuclear. Guía de Seguridad 11.4: criterios de aceptación de instalaciones de medicina nuclear. Madrid: CSN; 2022.',
-      },
-      {
-        id: 'material-2',
-        citation:
-          'Servicio Gallego de Salud. Medios humanos y materiales RF en MN y RD [Internet]. [cited 2026 May 18]. Available from: https://www.sergas.gal/Docs/PROCRAD/Medios%20humanos%20y%20materiales%20RF%20en%20MN%20y%20RD.pdf',
-        url: 'https://www.sergas.gal/Docs/PROCRAD/Medios%20humanos%20y%20materiales%20RF%20en%20MN%20y%20RD.pdf',
-      },
-      {
-        id: 'material-3',
-        citation:
-          'Sociedad Española de Física Médica, Sociedad Española de Protección Radiológica, Sociedad Española de Medicina Nuclear e Imagen Molecular. Protocolo de control de calidad de la instrumentación en medicina nuclear (versión 2020) [Internet]. Madrid: SEFM; 2020 [cited 2026 May 18]. Available from: https://sefm.es/2021/05/03/protocolo-de-control-de-calidad-de-la-instrumentacion-en-medicina-nuclear-version-2020/',
-        url: 'https://sefm.es/2021/05/03/protocolo-de-control-de-calidad-de-la-instrumentacion-en-medicina-nuclear-version-2020/',
+          'Iberomed. Material fungible sanitario: qué es y para qué sirve [Internet]. [place unknown]: Iberomed; [cited 2026 May 19]. Available from: https://iberomed.es/blog/material-fungible-sanitario-que-es-para-que-sirve/',
+        url: 'https://iberomed.es/blog/material-fungible-sanitario-que-es-para-que-sirve/',
       },
     ],
   },
   {
     id: 'protocolos-pm',
     title: 'Protocolos de Puesta en Marcha de los Equipos',
-    description: 'Fuentes técnicas empleadas para control de calidad, verificación y puesta en marcha de gammacámara y PET.',
+    description: 'Se mantiene únicamente la referencia normativa mencionada de forma explícita en la plataforma.',
     references: [
       {
         id: 'ppm-1',
         citation:
-          'International Atomic Energy Agency. Quality assurance for SPECT systems. IAEA Human Health Series No. 6. Vienna: IAEA; 2009.',
-      },
-      {
-        id: 'ppm-2',
-        citation:
-          'European Association of Nuclear Medicine. Quality control of nuclear medicine instrumentation and protocol standardisation [Internet]. Vienna: EANM; 2017 [cited 2026 May 18]. Available from: https://eanm.org/wp-content/uploads/2024/06/EANM_2017_TEchGuide_QualityControl-1.pdf',
-        url: 'https://eanm.org/wp-content/uploads/2024/06/EANM_2017_TEchGuide_QualityControl-1.pdf',
-      },
-      {
-        id: 'ppm-3',
-        citation:
-          'National Electrical Manufacturers Association. Performance measurements of positron emission tomographs (PET). NEMA NU 2-2018. Rosslyn (VA): NEMA; 2018.',
-      },
-      {
-        id: 'ppm-4',
-        citation:
-          'Sociedad Española de Física Médica, Sociedad Española de Protección Radiológica, Sociedad Española de Medicina Nuclear e Imagen Molecular. Protocolo de control de calidad de la instrumentación en medicina nuclear (versión 2020) [Internet]. Madrid: SEFM; 2020 [cited 2026 May 18]. Available from: https://sefm.es/2021/05/03/protocolo-de-control-de-calidad-de-la-instrumentacion-en-medicina-nuclear-version-2020/',
-        url: 'https://sefm.es/2021/05/03/protocolo-de-control-de-calidad-de-la-instrumentacion-en-medicina-nuclear-version-2020/',
+          'Vallejo Carrascal C. Técnicas de imagen en medicina nuclear. Madrid: Editorial Síntesis; 2019.',
       },
     ],
   },
   {
     id: 'actividades',
-    title: 'Actividades de Mantenimiento',
-    description: 'Referencias empleadas para actividades sobre generador, activímetro y controles operativos de rutina.',
+    title: 'Actividades',
+    description: 'Se mantiene únicamente la referencia normativa mencionada de forma explícita en la plataforma.',
     references: [
       {
         id: 'act-1',
         citation:
-          'International Atomic Energy Agency. Instruments QA / QC [Internet]. [cited 2026 May 18]. Available from: https://www.iaea.org/resource/hhc/nuclear-medicine/tools-instruments/instruments-qa-qc',
-        url: 'https://www.iaea.org/resource/hhc/nuclear-medicine/tools-instruments/instruments-qa-qc',
-      },
-      {
-        id: 'act-2',
-        citation:
-          'Najam H, Dearborn MC, Tafti D. Nuclear Medicine Instrumentation. In: StatPearls [Internet]. Treasure Island (FL): StatPearls Publishing; 2026 Jan- [updated 2023 Nov 14; cited 2026 May 18]. Available from: https://www.ncbi.nlm.nih.gov/books/NBK597384/',
-        url: 'https://www.ncbi.nlm.nih.gov/books/NBK597384/',
-      },
-      {
-        id: 'act-3',
-        citation:
-          'Sociedad Española de Física Médica, Sociedad Española de Protección Radiológica, Sociedad Española de Medicina Nuclear e Imagen Molecular. Protocolo de control de calidad de la instrumentación en medicina nuclear (versión 2020) [Internet]. Madrid: SEFM; 2020 [cited 2026 May 18]. Available from: https://sefm.es/2021/05/03/protocolo-de-control-de-calidad-de-la-instrumentacion-en-medicina-nuclear-version-2020/',
-        url: 'https://sefm.es/2021/05/03/protocolo-de-control-de-calidad-de-la-instrumentacion-en-medicina-nuclear-version-2020/',
+          'Vallejo Carrascal C. Técnicas de imagen en medicina nuclear. Madrid: Editorial Síntesis; 2019.',
       },
     ],
   },
   {
     id: 'protocolos-pr',
     title: 'Protocolos de Protección Radiológica',
-    description: 'Normativa y principios aplicados al monitoreo de área, contaminación y gestión de residuos radioactivos.',
+    description: 'Se mantiene únicamente la referencia normativa mencionada de forma explícita en la plataforma.',
     references: [
       {
         id: 'ppr-1',
         citation:
-          'España. Real Decreto 1029/2022, de 20 de diciembre, por el que se aprueba el Reglamento sobre protección de la salud contra los riesgos derivados de la exposición a las radiaciones ionizantes. Boletín Oficial del Estado. 2022 Dec 21;(305).',
-      },
-      {
-        id: 'ppr-2',
-        citation:
-          'Consejo de Seguridad Nuclear. Red ALARA [Internet]. [cited 2026 May 18]. Available from: https://www.csn.es/proteccion-radiologica/trabajadores/red-alara',
-        url: 'https://www.csn.es/proteccion-radiologica/trabajadores/red-alara',
-      },
-      {
-        id: 'ppr-3',
-        citation:
-          'International Commission on Radiological Protection. ICRP [Internet]. [cited 2026 May 18]. Available from: https://www.icrp.org/',
-        url: 'https://www.icrp.org/',
+          'España. Real Decreto 1841/1997, de 5 de diciembre, por el que se establecen los criterios de calidad en medicina nuclear. Boletín Oficial del Estado. 1997 Dec 19;(303).',
       },
     ],
   },
   {
     id: 'documentacion',
     title: 'Documentación',
-    description: 'Fuentes relacionadas con trazabilidad, archivo, registros técnicos y requisitos documentales del servicio.',
+    description: 'Se mantiene únicamente la referencia normativa mencionada de forma explícita en la plataforma.',
     references: [
       {
         id: 'doc-1',
         citation:
-          'Consejo de Seguridad Nuclear. Guía de Seguridad 11.4: criterios de aceptación de instalaciones de medicina nuclear. Madrid: CSN; 2022.',
-      },
-      {
-        id: 'doc-2',
-        citation:
-          'España. Real Decreto 1029/2022, de 20 de diciembre, por el que se aprueba el Reglamento sobre protección de la salud contra los riesgos derivados de la exposición a las radiaciones ionizantes. Boletín Oficial del Estado. 2022 Dec 21;(305).',
-      },
-      {
-        id: 'doc-3',
-        citation:
-          'International Atomic Energy Agency. Quality management system [Internet]. [cited 2026 May 18]. Available from: https://www.iaea.org/resources/hhc/medical-physics/nuclear-medicine/quality-management-system',
-        url: 'https://www.iaea.org/resources/hhc/medical-physics/nuclear-medicine/quality-management-system',
+          'Vallejo Carrascal C. Técnicas de imagen en medicina nuclear. Madrid: Editorial Síntesis; 2019.',
       },
     ],
   },
   {
     id: 'cierre',
     title: 'Cierre de la instalación',
-    description: 'Referencias de apoyo para verificación final, seguridad radiológica y control operativo al cierre de jornada.',
+    description: 'Se mantiene únicamente la referencia normativa mencionada de forma explícita en la plataforma.',
     references: [
       {
         id: 'cierre-1',
         citation:
-          'España. Real Decreto 1029/2022, de 20 de diciembre, por el que se aprueba el Reglamento sobre protección de la salud contra los riesgos derivados de la exposición a las radiaciones ionizantes. Boletín Oficial del Estado. 2022 Dec 21;(305).',
-      },
-      {
-        id: 'cierre-2',
-        citation:
-          'International Atomic Energy Agency. Quality management system [Internet]. [cited 2026 May 18]. Available from: https://www.iaea.org/resources/hhc/medical-physics/nuclear-medicine/quality-management-system',
-        url: 'https://www.iaea.org/resources/hhc/medical-physics/nuclear-medicine/quality-management-system',
-      },
-      {
-        id: 'cierre-3',
-        citation:
-          'Consejo de Seguridad Nuclear. Guía de Seguridad 11.4: criterios de aceptación de instalaciones de medicina nuclear. Madrid: CSN; 2022.',
+          'Vallejo Carrascal C. Técnicas de imagen en medicina nuclear. Madrid: Editorial Síntesis; 2019.',
       },
     ],
-  },
-  {
-    id: 'resumen-conclusiones',
-    title: 'Resumen y Conclusiones',
-    description: 'Fuentes globales que sostienen la síntesis final del trabajo y sus conclusiones operativas y regulatorias.',
-    references: [
-      {
-        id: 'res-1',
-        citation:
-          'International Atomic Energy Agency. Quality assurance for SPECT systems. IAEA Human Health Series No. 6. Vienna: IAEA; 2009.',
-      },
-      {
-        id: 'res-2',
-        citation:
-          'European Association of Nuclear Medicine. Quality control of nuclear medicine instrumentation and protocol standardisation [Internet]. Vienna: EANM; 2017 [cited 2026 May 18]. Available from: https://eanm.org/wp-content/uploads/2024/06/EANM_2017_TEchGuide_QualityControl-1.pdf',
-        url: 'https://eanm.org/wp-content/uploads/2024/06/EANM_2017_TEchGuide_QualityControl-1.pdf',
-      },
-      {
-        id: 'res-3',
-        citation:
-          'España. Real Decreto 1029/2022, de 20 de diciembre, por el que se aprueba el Reglamento sobre protección de la salud contra los riesgos derivados de la exposición a las radiaciones ionizantes. Boletín Oficial del Estado. 2022 Dec 21;(305).',
-      },
-      {
-        id: 'res-4',
-        citation:
-          'Consejo de Seguridad Nuclear. Guía de Seguridad 11.4: criterios de aceptación de instalaciones de medicina nuclear. Madrid: CSN; 2022.',
-      },
-    ],
-  },
+  }
 ];
 
 export const referencesSearchEntries: SearchEntry[] = referenceFolders.flatMap((folder) => [
@@ -372,9 +275,6 @@ export function References() {
               <BookOpen className="w-10 h-10 text-[#3F5B6F] dark:text-blue-300 flex-shrink-0" />
               <div>
                 <h2 className="text-gray-900 dark:text-white">Referencias</h2>
-                      <p className="text-black dark:text-white text-sm mt-1">
-                  Carpetas organizadas por sección de la web con las referencias bibliográficas utilizadas en formato Vancouver.
-                </p>
               </div>
             </div>
           </div>

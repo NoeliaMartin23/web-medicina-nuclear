@@ -65,10 +65,8 @@ export function Introduction() {
           </p>
           <p className="text-black dark:text-white mt-4">
             Los <b>Radiotrazadores</b> autorizados para uso clínico se denominan radiofármacos y deben cumplir estrictas normas de seguridad, 
-            calidad y eficacia establecidas por organismos reguladores como la 
-            <a href="https://www.ema.europa.eu/en/homepage" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline"><i> European Medicines Agency (EMA)</i></a> o el 
-            <a href="https://www.csn.es/home" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline"><i> Consejo de Seguridad
-            Nuclear (CSN)</i></a>. El especialista en Medicina Nuclear selecciona el radiofármaco más adecuado según la indicación clínica, lo 
+            calidad y eficacia establecidas por organismos reguladores como la <i>European Medicines Agency (EMA)</i> o el
+            <i> Consejo de Seguridad Nuclear (CSN)</i>. El especialista en Medicina Nuclear selecciona el radiofármaco más adecuado según la indicación clínica, lo 
             que determinará la realización de técnicas de imagen como la tomografía por emisión de positrones (PET) o la 
             tomografía por emisión de fotón único (SPECT).
           </p>
@@ -85,10 +83,8 @@ export function Introduction() {
           <p className="text-black dark:text-white mt-4">
             El proyecto tiene como finalidad describir de forma estructurada, técnica, sistemática y organizada los procedimientos de 
             mantenimiento, control de calidad y gestión documental en una sala de exploración de Medicina Nuclear, de acuerdo con las 
-            recomendaciones de organismos internacionales como la 
-            <a href="https://www.iaea.org/es" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline"><i> International Atomic Energy Agency (IAEA)</i></a>, la 
-            <a href="https://www.eanm.org/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline"><i> European Association of Nuclear Medicine (EANM)</i></a> y la 
-            <a href="https://www.icrp.org/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline"><i> International Commission on Radiological Protection (ICRP)</i></a>.
+            recomendaciones de organismos internacionales como la <i>International Atomic Energy Agency (IAEA)</i>, la
+            <i> European Association of Nuclear Medicine (EANM)</i> y la <i>International Commission on Radiological Protection (ICRP)</i>.
           </p>
         </div>
       </div>

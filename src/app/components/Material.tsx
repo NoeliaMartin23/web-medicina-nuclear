@@ -18,7 +18,13 @@ interface MaterialItem {
 interface MaterialDetail {
   content: ReactNode;
   plainText: string;
-  kind?: 'paragraph' | 'list';
+  kind?: 'paragraph' | 'list' | 'imageRow' | 'image';
+  image?: string;
+  alt?: string;
+  images?: {
+    src: string;
+    alt: string;
+  }[];
 }
 
 interface MaterialProps {
@@ -49,6 +55,26 @@ const bulletList = (items: ReactNode[], plainTextItems: string[]): MaterialDetai
   kind: 'list',
 });
 
+const imageRow = (
+  images: {
+    src: string;
+    alt: string;
+  }[]
+): MaterialDetail => ({
+  content: null,
+  plainText: images.map((image) => image.alt).join(' '),
+  kind: 'imageRow',
+  images,
+});
+
+const singleImage = (image: string, alt: string): MaterialDetail => ({
+  content: null,
+  plainText: alt,
+  kind: 'image',
+  image,
+  alt,
+});
+
 function MaterialButton({ item, onOpen }: MaterialButtonProps) {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -73,10 +99,12 @@ function MaterialButton({ item, onOpen }: MaterialButtonProps) {
         />
       </div>
       <div className="p-6">
-        <div className="w-12 h-12 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center mb-4">
-          {item.icon}
+        <div className="flex items-center gap-4 mb-3">
+          <div className="w-12 h-12 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center shrink-0">
+            {item.icon}
+          </div>
+          <h3 className="text-gray-900 dark:text-white text-xl">{item.title}</h3>
         </div>
-        <h3 className="text-gray-900 dark:text-white text-xl mb-3">{item.title}</h3>
                     <p className="text-black dark:text-white text-sm leading-relaxed">{item.summary}</p>
       </div>
     </div>
@@ -87,7 +115,7 @@ const materials: MaterialItem[] = [
   {
     id: 'material-fungible',
     title: 'Material fungible',
-    summary: 'Elementos de consumo habitual para la preparación y administración segura, con control continuo de stock, caducidades y trazabilidad.',
+    summary: '',
     icon: <Package className="w-5 h-5 text-green-600" />,
     image: `${baseUrl}images/imagen_material_fungible.png`,
     details: [
@@ -128,13 +156,17 @@ const materials: MaterialItem[] = [
           'Inyectores con alargaderas para la administración intravenosa de contrastes y radiofármacos.',
           'Fármacos (diuréticos) empleados en renogramas isotópicos, benzodiacepinas y relajantes musculares utilizados en estudios de PET, lugol para bloquear la captación tiroidea de yodo radiactivo y sueros glucosados e insulina.',
         ]
-      )
+      ),
+      singleImage(
+        `${baseUrl}images/Fungible1.jpg`,
+        'Material fungible'
+      ),
     ]
   },
   {
     id: 'material-no-fungible',
     title: 'Material no fungible',
-    summary: 'Recursos reutilizables de soporte y protección que requieren revisión periódica de estado, limpieza y mantenimiento para garantizar su funcionamiento.',
+    summary: '',
     icon: <Shield className="w-5 h-5 text-green-600" />,
     image: `${baseUrl}images/imagen_material_nofungible.png`,
     details: [
@@ -186,13 +218,27 @@ const materials: MaterialItem[] = [
           'Instrumentos de medida y control (activímetro o calibradores de dosis), contadores gamma y monitores de radiación.',
         ]
       ),
-      paragraph('Por otro lado, el mobiliario específico de la sala de exploración también forma parte del material no fungible. Este mobiliario está adaptado a las necesidades técnicas y asistenciales de la unidad, facilitando el trabajo del personal sanitario y mejorando la atención al paciente durante los procedimientos diagnósticos y terapéuticos realizados en Medicina Nuclear.')
+      paragraph('Por otro lado, el mobiliario específico de la sala de exploración también forma parte del material no fungible. Este mobiliario está adaptado a las necesidades técnicas y asistenciales de la unidad, facilitando el trabajo del personal sanitario y mejorando la atención al paciente durante los procedimientos diagnósticos y terapéuticos realizados en Medicina Nuclear.'),
+      imageRow([
+        {
+          src: `${baseUrl}images/NoFungible1.jpg`,
+          alt: 'Preparación no fungible 1',
+        },
+        {
+          src: `${baseUrl}images/NoFungible2.jpg`,
+          alt: 'Preparación no fungible 2',
+        },
+        {
+          src: `${baseUrl}images/NoFungible3.jpg`,
+          alt: 'Preparación no fungible 3',
+        },
+      ]),
     ]
   },
   {
     id: 'material-preparacion',
     title: 'Preparación, Control y Reposición del material',
-    summary: 'Gestión operativa del circuito de material: preparación previa, verificación durante la actividad y reposición al cierre para asegurar continuidad asistencial.',
+    summary: '',
     icon: <Settings className="w-5 h-5 text-green-600" />,
     image:
       'https://images.unsplash.com/photo-1579154341098-e4e158cc7f55?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
@@ -294,19 +340,20 @@ const materials: MaterialItem[] = [
       paragraph(
         'Una correcta reposición del material garantiza la precisión diagnóstica, mejora la seguridad radiológica y contribuye a mantener unas condiciones técnicas adecuadas para el desarrollo de la actividad clínica diaria.'
       ),
-      paragraph(
-        <>
-          <a
-            href="https://iberomed.es/blog/material-fungible-sanitario-que-es-para-que-sirve/#:~:text=El%20material%20fungible%20sanitario%20engloba,asepsia%20en%20los%20procedimientos%20m%C3%A9dicos."
-            target="_blank"
-            rel="noreferrer"
-            className="text-blue-600 underline dark:text-blue-400"
-          >
-            https://iberomed.es/blog/material-fungible-sanitario-que-es-para-que-sirve/
-          </a>
-        </>,
-        'https://iberomed.es/blog/material-fungible-sanitario-que-es-para-que-sirve/'
-      )
+      imageRow([
+        {
+          src: `${baseUrl}images/Preparacion1.jpg`,
+          alt: 'Preparación del material 1',
+        },
+        {
+          src: `${baseUrl}images/Preparacion2.jpg`,
+          alt: 'Preparación del material 2',
+        },
+        {
+          src: `${baseUrl}images/Preparacion3.jpg`,
+          alt: 'Preparación del material 3',
+        },
+      ]),
     ]
   }
 ];
@@ -362,15 +409,54 @@ export function Material({ selectedSubSectionId = null, onBackToOverview }: Mate
           </div>
 
           <div className="space-y-4">
-            {selectedMaterial.details.map((detail, index) => (
-              detail.kind === 'list' ? (
-                <div key={index}>{detail.content}</div>
-              ) : (
+            {selectedMaterial.details.map((detail, index) => {
+              if (detail.kind === 'list') {
+                return <div key={index}>{detail.content}</div>;
+              }
+
+              if (detail.kind === 'imageRow') {
+                return (
+                  <div
+                    key={index}
+                    className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6"
+                  >
+                    {detail.images?.map((image, imageIndex) => (
+                      <div
+                        key={imageIndex}
+                        className="rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700"
+                      >
+                        <ImageWithFallback
+                          src={image.src}
+                          alt={image.alt}
+                          className="w-full h-80 object-cover block"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                );
+              }
+
+              if (detail.kind === 'image') {
+                return (
+                  <div
+                    key={index}
+                    className="mt-6 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700"
+                  >
+                    <ImageWithFallback
+                      src={detail.image ?? ''}
+                      alt={detail.alt ?? detail.plainText}
+                      className="w-full h-[450px] object-contain block"
+                    />
+                  </div>
+                );
+              }
+
+              return (
                 <p key={index} className="text-black dark:text-white leading-relaxed">
                   {detail.content}
                 </p>
-              )
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

@@ -1,6 +1,7 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { ArrowLeft, FileText, CircleCheck } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import resumenConclusionesIcono from '../../assets/resumen-conclusiones-icono.svg';
 
 interface SummaryConclusionItem {
   id: string;
@@ -45,10 +46,12 @@ function ResumenConclusionesButton({ item, onOpen }: ResumenConclusionesButtonPr
         />
       </div>
       <div className="p-6">
-        <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mb-4">
-          {item.icon}
+        <div className="flex items-center gap-4 mb-3">
+          <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center shrink-0">
+            {item.icon}
+          </div>
+          <h3 className="text-gray-900 dark:text-white text-xl">{item.title}</h3>
         </div>
-        <h3 className="text-gray-900 dark:text-white text-xl mb-3">{item.title}</h3>
                     <p className="text-black dark:text-white text-sm leading-relaxed">{item.summary}</p>
       </div>
     </div>
@@ -59,7 +62,7 @@ const summaryConclusionItems: SummaryConclusionItem[] = [
   {
     id: 'resumen-ejecutivo',
     title: 'Resumen',
-    summary: 'Síntesis de los puntos clave del programa de mantenimiento en medicina nuclear.',
+    summary: '',
     icon: <FileText className="w-5 h-5 text-blue-600" />,
     image: '/images/FotoResumen.png',
     details: [
@@ -73,7 +76,7 @@ const summaryConclusionItems: SummaryConclusionItem[] = [
   {
     id: 'conclusiones-finales',
     title: 'Conclusiones',
-    summary: 'Conclusiones finales sobre impacto, seguridad y sostenibilidad del mantenimiento.',
+    summary: '',
     icon: <CircleCheck className="w-5 h-5 text-blue-600" />,
     image: '/images/FotoConclusiones.png',
     details: [
@@ -154,7 +157,15 @@ export function ResumenConclusiones({
     <section className="py-16 px-6">
       <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
         <div className="mb-12">
-          <h2 className="text-gray-900 dark:text-white mb-3">Resumen y Conclusiones</h2>
+          <div className="flex items-center gap-3 mb-3">
+            <img
+              src={resumenConclusionesIcono}
+              alt=""
+              aria-hidden="true"
+              className="w-16 h-16 object-contain shrink-0"
+            />
+            <h2 className="text-gray-900 dark:text-white">Resumen y Conclusiones</h2>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

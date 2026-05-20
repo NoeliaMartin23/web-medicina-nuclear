@@ -26,7 +26,11 @@ interface ProcedureButtonProps {
 interface ProcedureDetail {
   content: ReactNode;
   plainText: string;
-  kind?: 'paragraph' | 'list';
+  kind?: 'paragraph' | 'list' | 'imageRow';
+  images?: {
+    src: string;
+    alt: string;
+  }[];
 }
 
 const paragraph = (
@@ -53,6 +57,18 @@ const bulletList = (
   kind: 'list',
 });
 
+const imageRow = (
+  images: {
+    src: string;
+    alt: string;
+  }[]
+): ProcedureDetail => ({
+  content: null,
+  plainText: images.map((image) => image.alt).join(' '),
+  kind: 'imageRow',
+  images,
+});
+
 function ProcedureButton({ item, onOpen }: ProcedureButtonProps) {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -77,10 +93,12 @@ function ProcedureButton({ item, onOpen }: ProcedureButtonProps) {
         />
       </div>
       <div className="p-6">
-        <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mb-4">
-          {item.icon}
+        <div className="flex items-center gap-4 mb-3">
+          <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center shrink-0">
+            {item.icon}
+          </div>
+          <h3 className="text-gray-900 dark:text-white text-xl">{item.title}</h3>
         </div>
-        <h3 className="text-gray-900 dark:text-white text-xl mb-3">{item.title}</h3>
                     <p className="text-black dark:text-white text-sm leading-relaxed">{item.summary}</p>
       </div>
     </div>
@@ -92,10 +110,9 @@ const procedures: ProcedureItem[] = [
     id: 'procedimientos-monitoreo',
     title: 'Monitoreo de área y contaminación',
     summary:
-      'Vigilancia radiológica de áreas y superficies para detectar niveles de exposición o contaminación radiactiva.',
+      '',
     icon: <Radar className="w-5 h-5 text-blue-600" />,
-    image:
-      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    image: '/images/PortadaContaminacion.jpg',
     details: [
       paragraph(
         'La unidad de Medicina Nuclear debe disponer de detectores de radiación ambiental para la vigilancia de área, así como de detectores de contaminación destinados a evaluar la posible presencia de material radiactivo en superficies y zonas de trabajo.'
@@ -119,6 +136,16 @@ const procedures: ProcedureItem[] = [
         </>,
         'Los resultados obtenidos se expresan generalmente en Bq/cm2, unidad empleada para determinar el nivel de contaminación superficial presente en un área concreta.'
       ),
+      imageRow([
+        {
+          src: '/images/Contaminacion1.jpg',
+          alt: 'Monitoreo de contaminación 1',
+        },
+        {
+          src: '/images/Contaminacion2.jpg',
+          alt: 'Monitoreo de contaminación 2',
+        },
+      ]),
     ],
   },
 
@@ -126,10 +153,9 @@ const procedures: ProcedureItem[] = [
     id: 'procedimientos-gestion',
     title: 'Gestión de residuos radiactivos',
     summary:
-      'Clasificación, almacenamiento, señalización y control de residuos radiactivos generados en Medicina Nuclear.',
+      '',
     icon: <Trash2 className="w-5 h-5 text-blue-600" />,
-    image:
-      'https://images.unsplash.com/photo-1605201107820-951659ec034e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+    image: '/images/PortadaResiduos.jpg',
     details: [
       paragraph(
         'La gestión de residuos radiactivos en Medicina Nuclear engloba los procedimientos destinados a garantizar la protección del personal, los pacientes y el medio ambiente frente a las radiaciones ionizantes.'
@@ -142,6 +168,42 @@ const procedures: ProcedureItem[] = [
       paragraph(
         'Los residuos sólidos, líquidos y gaseosos requieren medidas de manipulación y control específicas, así como un registro adecuado de su gestión y supervisión por parte del Servicio de Protección Radiológica.'
       ),
+      imageRow([
+        {
+          src: '/images/Residuos1.jpg',
+          alt: 'Gestión de residuos 1',
+        },
+        {
+          src: '/images/Residuos2.jpg',
+          alt: 'Gestión de residuos 2',
+        },
+      ]),
+      paragraph('GESTIÓN DE RESIDUOS EN TERAPIA METABÓLICA'),
+      imageRow([
+        {
+          src: '/images/Residuos3.jpg',
+          alt: 'Gestión de residuos 3',
+        },
+        {
+          src: '/images/Residuos4.jpg',
+          alt: 'Gestión de residuos 4',
+        },
+      ]),
+      paragraph('ALMACEN DE RESIDUOS'),
+      imageRow([
+        {
+          src: '/images/Residuos5.jpg',
+          alt: 'Almacén de residuos 5',
+        },
+        {
+          src: '/images/Residuos6.jpg',
+          alt: 'Almacén de residuos 6',
+        },
+        {
+          src: '/images/Residuos7.jpg',
+          alt: 'Almacén de residuos 7',
+        },
+      ]),
     ],
   },
 ];
@@ -197,15 +259,39 @@ export function Procedures({ selectedSubSectionId = null, onBackToOverview }: Pr
           </div>
 
           <div className="space-y-4">
-            {selectedProcedure.details.map((detail, index) =>
-              detail.kind === 'list' ? (
-                <div key={index}>{detail.content}</div>
-              ) : (
+            {selectedProcedure.details.map((detail, index) => {
+              if (detail.kind === 'list') {
+                return <div key={index}>{detail.content}</div>;
+              }
+
+              if (detail.kind === 'imageRow') {
+                return (
+                  <div
+                    key={index}
+                    className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6"
+                  >
+                    {detail.images?.map((image, imageIndex) => (
+                      <div
+                        key={imageIndex}
+                        className="rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700"
+                      >
+                        <ImageWithFallback
+                          src={image.src}
+                          alt={image.alt}
+                          className="w-full h-[420px] object-contain block"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                );
+              }
+
+              return (
                 <p key={index} className="text-black dark:text-white leading-relaxed">
                   {detail.content}
                 </p>
-              )
-            )}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -254,6 +340,14 @@ export function Procedures({ selectedSubSectionId = null, onBackToOverview }: Pr
                 <strong>Zona controlada:</strong> es aquella donde existe mayor riesgo de exposición radiológica, pudiendo superarse los 6 mSv anuales. En esta categoría se incluyen habitualmente las salas de exploración, inyección, pacientes inyectados y el cuarto caliente.
               </li>
             </ul>
+
+            <div className="mt-6 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700">
+              <ImageWithFallback
+                src="/images/PR1.jpg"
+                alt="Zona controlada en protección radiológica"
+                className="w-full h-[250px] object-contain block"
+              />
+            </div>
 
             <p>
               La señalización de las zonas debe indicar los riesgos de irradiación y contaminación existentes. Además, el personal expuesto debe someterse a control dosimétrico y clasificarse como categoría A o B. Los técnicos que trabajan en zonas controladas pertenecen normalmente a la categoría A y deben utilizar dosímetros individuales.
