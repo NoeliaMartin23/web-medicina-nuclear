@@ -3,6 +3,8 @@ import { ArrowLeft, FileText, CircleCheck } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import resumenConclusionesIcono from '../../assets/resumen-conclusiones-icono.svg';
 
+const baseUrl = import.meta.env.BASE_URL;
+
 interface SummaryConclusionItem {
   id: string;
   title: string;
@@ -64,7 +66,7 @@ const summaryConclusionItems: SummaryConclusionItem[] = [
     title: 'Resumen',
     summary: '',
     icon: <FileText className="w-5 h-5 text-blue-600" />,
-    image: '/images/FotoResumen.png',
+    image: `${baseUrl}images/FotoResumen.png`,
     details: [
       'El trabajo se centra en el mantenimiento de los equipos y del material utilizado en una instalación de Medicina Nuclear, destacando la importancia de garantizar la seguridad, el correcto funcionamiento técnico y la calidad diagnóstica de las exploraciones realizadas.',
       'En primer lugar, se ha estudiado el equipamiento principal presente en una unidad de Medicina Nuclear, incluyendo gammacámaras, sistemas PET-TC, activímetros, generadores y diferentes accesorios necesarios para la adquisición y procesamiento de imágenes diagnósticas. También se ha descrito el material de la sala de exploración, diferenciando entre material fungible y no fungible, así como las medidas necesarias para su conservación, limpieza y reposición.',
@@ -78,7 +80,7 @@ const summaryConclusionItems: SummaryConclusionItem[] = [
     title: 'Conclusiones',
     summary: '',
     icon: <CircleCheck className="w-5 h-5 text-blue-600" />,
-    image: '/images/FotoConclusiones.png',
+    image: `${baseUrl}images/FotoConclusiones.png`,
     details: [
       'El mantenimiento de los equipos y del material de una instalación de Medicina Nuclear constituye una actividad fundamental para garantizar exploraciones diagnósticas seguras, precisas y de calidad. El correcto estado de los equipos no solo influye en la obtención de imágenes fiables, sino también en la seguridad del paciente, del personal sanitario y del entorno de trabajo.',
       'A lo largo del trabajo se ha podido comprobar que los procedimientos de mantenimiento preventivo permiten detectar fallos antes de que afecten al funcionamiento de los sistemas, reduciendo tiempos de inactividad y evitando posibles riesgos radiológicos. Asimismo, la adecuada organización del material de la sala y el cumplimiento de los protocolos de cierre favorecen un entorno de trabajo más eficiente, controlado y seguro.',

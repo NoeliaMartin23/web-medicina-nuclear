@@ -4,6 +4,8 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 import documentacionIcono from '../../assets/documentacion-icono.svg';
 import type { SearchEntry } from '../searchTypes';
 
+const baseUrl = import.meta.env.BASE_URL;
+
 interface DocumentItem {
   id: string;
   title: string;
@@ -152,7 +154,7 @@ const documents: DocumentItem[] = [
           'El profesional responsable.',
           'Las medidas correctoras adoptadas.',
         ],
-        '/images/RegistrosYAverias.png',
+        `${baseUrl}images/RegistrosYAverias.png`,
         'Registro de averías e incidencias'
       ),
 

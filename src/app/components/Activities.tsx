@@ -4,6 +4,8 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 import actividadesIcono from '../../assets/actividades-icono.svg';
 import type { SearchEntry } from '../searchTypes';
 
+const baseUrl = import.meta.env.BASE_URL;
+
 interface ActivityItem {
   id: string;
   title: string;
@@ -165,7 +167,7 @@ const activities: ActivityItem[] = [
         'La realización periódica de estos controles garantiza la obtención de radiofármacos seguros, eficaces y adecuados para su utilización clínica, contribuyendo a mantener la calidad diagnóstica y la seguridad radiológica en la unidad de Medicina Nuclear.'
       ),
       singleImage(
-        '/images/Generador1.jpg',
+        `${baseUrl}images/Generador1.jpg`,
         'Generador de radiofármacos'
       ),
     ],
@@ -220,11 +222,11 @@ const activities: ActivityItem[] = [
       ),
       imageRow([
         {
-          src: '/images/Activimetro1.jpg',
+          src: `${baseUrl}images/Activimetro1.jpg`,
           alt: 'Activímetro 1',
         },
         {
-          src: '/images/Activimetro2.jpg',
+          src: `${baseUrl}images/Activimetro2.jpg`,
           alt: 'Activímetro 2',
         },
       ]),

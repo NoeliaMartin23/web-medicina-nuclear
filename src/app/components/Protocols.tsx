@@ -4,6 +4,8 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 import protocolosIcono from '../../assets/protocolos-icono.svg';
 import type { SearchEntry } from '../searchTypes';
 
+const baseUrl = import.meta.env.BASE_URL;
+
 interface ProtocolItem {
   id: string;
   title: string;
@@ -123,7 +125,7 @@ const protocolItems: ProtocolItem[] = [
     title: 'Gammacámara',
     summary: '',
     icon: <Scan className="w-5 h-5 text-blue-600" />,
-    image: '/images/PortadaGammacamara.jpg',
+    image: `${baseUrl}images/PortadaGammacamara.jpg`,
     details: [
       paragraph(
         'Los fabricantes de las gammacámaras establecen un programa de controles de calidad con diferentes periodicidades en función del parámetro evaluado. Las pruebas de carácter diario deben realizarse antes del inicio de la actividad clínica, con el fin de garantizar el correcto funcionamiento del equipo y asegurar la calidad diagnóstica de las imágenes obtenidas.'
@@ -190,35 +192,35 @@ const protocolItems: ProtocolItem[] = [
         'En resumen, esta prueba garantiza que la gammacámara funciona correctamente y que las imágenes obtenidas en los pacientes serán fiables, precisas y útiles para el diagnóstico.'
       ),
       videoDetail(
-        '/images/VideoGamma1.mp4',
+      '',
         'Vídeo de control de uniformidad de la gammacámara'
       ),
       imageRow([
         {
-          src: '/images/Gamma1.jpg',
+          src: `${baseUrl}images/Gamma1.jpg`,
           alt: 'Control de gammacámara 1',
         },
         {
-          src: '/images/Gamma2.jpg',
+          src: `${baseUrl}images/Gamma2.jpg`,
           alt: 'Control de gammacámara 2',
         },
         {
-          src: '/images/Gamma3.jpg',
+          src: `${baseUrl}images/Gamma3.jpg`,
           alt: 'Control de gammacámara 3',
         },
       ]),
       paragraph('Cambio de colimadores:'),
       videoDetail(
-        '/images/VideoGamma2.mp4',
+      '',
         'Vídeo de control de uniformidad de la gammacámara'
       ),
       imageRow([
         {
-          src: '/images/Gamma4.jpg',
+          src: `${baseUrl}images/Gamma4.jpg`,
           alt: 'Control de gammacámara 1',
         },
         {
-          src: '/images/Gamma5.jpg',
+          src: `${baseUrl}images/Gamma5.jpg`,
           alt: 'Control de gammacámara 2',
         },
       ]),
@@ -229,7 +231,7 @@ const protocolItems: ProtocolItem[] = [
     title: 'PET',
     summary: '',
     icon: <Activity className="w-5 h-5 text-blue-600" />,
-    image: '/images/PortadaPet.jpg',
+    image: `${baseUrl}images/PortadaPet.jpg`,
     details: [
       paragraph(
         <>
@@ -277,7 +279,7 @@ const protocolItems: ProtocolItem[] = [
         ]
       ),
       singleImage(
-        '/images/Pet1.jpg',
+      `${baseUrl}images/Pet1.jpg`,
         'Uniformidad tomográfica PET'
       ),
     ]
@@ -356,6 +358,9 @@ export function Protocols({ selectedSubSectionId = null, onBackToOverview }: Pro
               }
 
               if (detail.kind === 'video') {
+                if (!detail.video) {
+                  return null;
+                }
                 return (
                   <div
                     key={index}

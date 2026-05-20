@@ -4,6 +4,8 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 import protocolosIcono from '../../assets/protocolos-icono.svg';
 import type { SearchEntry } from '../searchTypes';
 
+const baseUrl = import.meta.env.BASE_URL;
+
 interface ProcedureItem {
   id: string;
   title: string;
@@ -112,7 +114,7 @@ const procedures: ProcedureItem[] = [
     summary:
       '',
     icon: <Radar className="w-5 h-5 text-blue-600" />,
-    image: '/images/PortadaContaminacion.jpg',
+    image: `${baseUrl}images/PortadaContaminacion.jpg`,
     details: [
       paragraph(
         'La unidad de Medicina Nuclear debe disponer de detectores de radiación ambiental para la vigilancia de área, así como de detectores de contaminación destinados a evaluar la posible presencia de material radiactivo en superficies y zonas de trabajo.'
@@ -138,11 +140,11 @@ const procedures: ProcedureItem[] = [
       ),
       imageRow([
         {
-          src: '/images/Contaminacion1.jpg',
+          src: `${baseUrl}images/Contaminacion1.jpg`,
           alt: 'Monitoreo de contaminación 1',
         },
         {
-          src: '/images/Contaminacion2.jpg',
+          src: `${baseUrl}images/Contaminacion2.jpg`,
           alt: 'Monitoreo de contaminación 2',
         },
       ]),
@@ -155,7 +157,7 @@ const procedures: ProcedureItem[] = [
     summary:
       '',
     icon: <Trash2 className="w-5 h-5 text-blue-600" />,
-    image: '/images/PortadaResiduos.jpg',
+    image: `${baseUrl}images/PortadaResiduos.jpg`,
     details: [
       paragraph(
         'La gestión de residuos radiactivos en Medicina Nuclear engloba los procedimientos destinados a garantizar la protección del personal, los pacientes y el medio ambiente frente a las radiaciones ionizantes.'
@@ -170,37 +172,37 @@ const procedures: ProcedureItem[] = [
       ),
       imageRow([
         {
-          src: '/images/Residuos1.jpg',
+          src: `${baseUrl}images/Residuos1.jpg`,
           alt: 'Gestión de residuos 1',
         },
         {
-          src: '/images/Residuos2.jpg',
+          src: `${baseUrl}images/Residuos2.jpg`,
           alt: 'Gestión de residuos 2',
         },
       ]),
       paragraph('GESTIÓN DE RESIDUOS EN TERAPIA METABÓLICA'),
       imageRow([
         {
-          src: '/images/Residuos3.jpg',
+          src: `${baseUrl}images/Residuos3.jpg`,
           alt: 'Gestión de residuos 3',
         },
         {
-          src: '/images/Residuos4.jpg',
+          src: `${baseUrl}images/Residuos4.jpg`,
           alt: 'Gestión de residuos 4',
         },
       ]),
       paragraph('ALMACEN DE RESIDUOS'),
       imageRow([
         {
-          src: '/images/Residuos5.jpg',
+          src: `${baseUrl}images/Residuos5.jpg`,
           alt: 'Almacén de residuos 5',
         },
         {
-          src: '/images/Residuos6.jpg',
+          src: `${baseUrl}images/Residuos6.jpg`,
           alt: 'Almacén de residuos 6',
         },
         {
-          src: '/images/Residuos7.jpg',
+          src: `${baseUrl}images/Residuos7.jpg`,
           alt: 'Almacén de residuos 7',
         },
       ]),
