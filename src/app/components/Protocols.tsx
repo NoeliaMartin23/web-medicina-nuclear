@@ -192,7 +192,7 @@ const protocolItems: ProtocolItem[] = [
         'En resumen, esta prueba garantiza que la gammacámara funciona correctamente y que las imágenes obtenidas en los pacientes serán fiables, precisas y útiles para el diagnóstico.'
       ),
       videoDetail(
-      '',
+        `${baseUrl}images/VideoGamma1.mp4`,
         'Vídeo de control de uniformidad de la gammacámara'
       ),
       imageRow([
@@ -211,7 +211,7 @@ const protocolItems: ProtocolItem[] = [
       ]),
       paragraph('Cambio de colimadores:'),
       videoDetail(
-      '',
+        `${baseUrl}images/VideoGamma2.mp4`,
         'Vídeo de control de uniformidad de la gammacámara'
       ),
       imageRow([

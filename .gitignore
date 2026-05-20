@@ -29,5 +29,5 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Large media (keep out of git; use Git LFS or external hosting)
-public/images/*.mp4
+# Large media
+# mp4 se versionan con Git LFS para poder servirlos desde GitHub Pages.

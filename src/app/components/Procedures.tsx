@@ -345,7 +345,7 @@ export function Procedures({ selectedSubSectionId = null, onBackToOverview }: Pr
 
             <div className="mt-6 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-700">
               <ImageWithFallback
-                src="/images/PR1.jpg"
+                src={`${baseUrl}images/PR1.jpg`}
                 alt="Zona controlada en protección radiológica"
                 className="w-full h-[250px] object-contain block"
               />
