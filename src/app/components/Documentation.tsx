@@ -124,7 +124,7 @@ const documents: DocumentItem[] = [
       '',
     icon: <AlertTriangle className="w-5 h-5 text-blue-600" />,
     image:
-      'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+      `${baseUrl}images/RegistroAveriasIncidencias1.jpeg`,
 
     details: [
       paragraph(
@@ -189,7 +189,7 @@ const documents: DocumentItem[] = [
     icon: <Archive className="w-5 h-5 text-blue-600" />,
 
     image:
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+      `${baseUrl}images/ArchivoInformes1.jpeg`,
 
     details: [
       paragraph(
